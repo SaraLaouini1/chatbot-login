@@ -1,0 +1,20 @@
+/*.app-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}*/
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-window {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
