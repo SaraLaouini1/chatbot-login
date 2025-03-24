@@ -60,7 +60,11 @@ export default function Chat() {
         response: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(API_URL, { prompt: input });
+      }>(API_URL, { prompt: input }, {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+});
 
       setMessages(prev => [...prev, {
         text: response.data.response,
