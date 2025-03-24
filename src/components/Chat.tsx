@@ -57,33 +57,30 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
     
-    setLoading(true);
-    setError(null);
-    
     try {
-      setMessages(prev => [...prev, { 
-        text: input, 
-        isUser: true, 
-        id: Date.now() 
-      }]);
+        // Stringify the payload explicitly
+        const payload = JSON.stringify({ prompt: input.trim() });
+        console.log("Sending payload:", payload);
 
-      const response = await axios.post<{
-        response: string;
-        anonymized_prompt: string;
-        mapping: AnonymizationMapping[];
-    }>(API_URL, 
-        { prompt: input }, 
-        {
+        const response = await axios.post(API_URL, payload, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
+        });
+        // ... rest of your code ...
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            console.error("Full error response:", err.response?.data);
         }
-    );
+        // ... existing error handling ...
+    }
+}
 
       setMessages(prev => [...prev, {
         text: response.data.response,
