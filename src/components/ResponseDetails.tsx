@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 export default function ResponseDetails({ details }: { 
     details: {
+        anonymizedPrompt: string;
         raw: string;
-        afterRecontext: string;
         final: string;
     }
 }) {
@@ -21,6 +21,13 @@ export default function ResponseDetails({ details }: {
             {expanded && (
                 <div className="processing-steps">
                     <div className="step">
+                        <h4>Anonymized Prompt</h4>
+                        <div className="content-block">
+                            {details.anonymizedPrompt}
+                        </div>
+                    </div>
+                    
+                    <div className="step">
                         <h4>LLM Raw Response</h4>
                         <div className="content-block">
                             {details.raw}
@@ -29,13 +36,6 @@ export default function ResponseDetails({ details }: {
                     
                     <div className="step">
                         <h4>After Recontextualization</h4>
-                        <div className="content-block">
-                            {details.afterRecontext}
-                        </div>
-                    </div>
-                    
-                    <div className="step">
-                        <h4>Final Cleaned Response</h4>
                         <div className="content-block">
                             {details.final}
                         </div>
