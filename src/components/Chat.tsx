@@ -28,11 +28,25 @@ export default function Chat() {
   const navigate = useNavigate()
 
  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-        navigate('/login')
+    const verifyToken = async () => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            navigate('/login')
+            return
+        }
+
+        try {
+            await axios.get('/verify', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        } catch (err) {
+            localStorage.removeItem('token')
+            navigate('/login')
+        }
     }
-  }, [navigate])
+
+    verifyToken()
+}, [navigate])
 
   // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
