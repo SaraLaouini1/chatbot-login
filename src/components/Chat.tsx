@@ -23,6 +23,16 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null); // New ref for scrolling
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
+
+  const navigate = useNavigate()
+
+ useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+        navigate('/login')
+    }
+  }, [navigate])
+
   // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
     scrollToBottom();
