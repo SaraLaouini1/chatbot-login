@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { FiSend } from 'react-icons/fi'
-import './Chat.css'
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FiSend } from 'react-icons/fi';
+import './Chat.css';
 
 interface Message {
   text: string;
@@ -21,95 +21,78 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // New ref for scrolling
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+  const navigate = useNavigate();
 
-
-  const navigate = useNavigate()
-
- useEffect(() => {
+  useEffect(() => {
     const verifyToken = async () => {
-        const token = localStorage.getItem('token')
-        if (!token) {
-            navigate('/login')
-            return
-        }
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
 
-        try {
-            await axios.get('/verify', {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-        } catch (err) {
-            localStorage.removeItem('token')
-            navigate('/login')
-        }
-    }
+      try {
+        await axios.get('/verify', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      } catch (err) {
+        localStorage.removeItem('token');
+        navigate('/login');
+      }
+    };
 
-    verifyToken()
-}, [navigate])
+    verifyToken();
+  }, [navigate]);
 
-  // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
     scrollToBottom();
-  }, [messages, loading]); // Added dependency array
+  }, [messages, loading]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
-    
+
     setLoading(true);
     setError(null);
 
     try {
-        // Stringify the payload explicitly
-        const payload = JSON.stringify({ prompt: input.trim() });
-        console.log("Sending payload:", payload);
+      // Add user message immediately
+      setMessages(prev => [...prev, {
+        text: input,
+        isUser: true,
+        id: Date.now()
+      }]);
 
-        const response = await axios.post(API_URL, payload, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-
-        setMessages(prev => [...prev, {
-            text: response.data.response,
-            isUser: false,
-            id: Date.now() + 1
-        }]);
-
-    } catch (err) {
-        let errorMessage = 'Failed to send message';
-        if (axios.isAxiosError(err)) {
-            console.error("Full error response:", err.response?.data);
-            errorMessage = err.response?.data?.error || err.message;
+      const payload = JSON.stringify({ prompt: input.trim() });
+      const response = await axios.post<{
+        response: string;
+        anonymized_prompt: string;
+        mapping: AnonymizationMapping[];
+      }>(API_URL, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        setError(errorMessage);
-        console.error(err);
-    } finally {
-        setLoading(false);
-        setInput('');
-    }
-};
+      });
 
       setMessages(prev => [...prev, {
         text: response.data.response,
         isUser: false,
         id: Date.now() + 1
       }]);
-      
+
     } catch (err) {
       let errorMessage = 'Failed to send message';
       if (axios.isAxiosError(err)) {
         errorMessage = err.response?.data?.error || err.message;
       }
       setError(errorMessage);
-      console.error(err);
     } finally {
       setLoading(false);
       setInput('');
@@ -137,7 +120,6 @@ export default function Chat() {
             Generating response...
           </div>
         )}
-        {/* Empty div at bottom for scrolling reference */}
         <div ref={messagesEndRef} />
       </div>
 
@@ -171,7 +153,6 @@ export default function Chat() {
             disabled={loading}
             className="chat-input"
           />
-
           <button
             type="submit"
             disabled={loading}
