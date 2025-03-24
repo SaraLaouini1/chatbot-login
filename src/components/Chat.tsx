@@ -90,11 +90,11 @@ export default function Chat() {
 
       <div className="messages-container">
         {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`message ${msg.isUser ? 'user' : 'bot'}`}
-          >
-            {msg.text}
+          <div className={`message ${msg.isUser ? 'user' : 'bot'}`}>
+              {msg.text}
+              {msg.details && (
+                  <ResponseDetails details={msg.details} />
+              )}
           </div>
         ))}
         {loading && (
