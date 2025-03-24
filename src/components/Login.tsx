@@ -23,7 +23,14 @@ export default function Login() {
                 return
             }
 
+            #localStorage.setItem('token', response.data.access_token)
+            // Store both token and username
             localStorage.setItem('token', response.data.access_token)
+            localStorage.setItem('username', response.data.username)
+            
+            // Force React to recognize auth state change
+            window.dispatchEvent(new Event('storage'))
+            
             navigate('/chat')
         } catch (err) {
             setError(axios.isAxiosError(err) 
