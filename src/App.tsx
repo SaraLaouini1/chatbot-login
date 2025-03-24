@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Chat from './components/Chat'
 import Login from './components/Login'
 import { useEffect, useState } from 'react'
