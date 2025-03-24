@@ -62,43 +62,43 @@ export default function Chat() {
     setError(null);
 
     try {
-      // Add user message immediately
-      setMessages(prev => [...prev, {
-        text: input,
-        isUser: true,
-        id: Date.now()
-      }]);
+        // Add user message immediately
+        setMessages(prev => [...prev, {
+            text: input,
+            isUser: true,
+            id: Date.now()
+        }]);
 
-      const payload = JSON.stringify({ prompt: input.trim() });
-      const response = await axios.post<{
-        response: string;
-        anonymized_prompt: string;
-        mapping: AnonymizationMapping[];
-      }>(API_URL, payload, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
+        // Remove JSON.stringify() and send object directly
+        const response = await axios.post<{
+            response: string;
+            anonymized_prompt: string;
+            mapping: AnonymizationMapping[];
+        }>(API_URL, { prompt: input.trim() }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
 
-      setMessages(prev => [...prev, {
-        text: response.data.response,
-        isUser: false,
-        id: Date.now() + 1
-      }]);
+        setMessages(prev => [...prev, {
+            text: response.data.response,
+            isUser: false,
+            id: Date.now() + 1
+        }]);
 
     } catch (err) {
-      let errorMessage = 'Failed to send message';
-      if (axios.isAxiosError(err)) {
-        errorMessage = err.response?.data?.error || err.message;
-      }
-      setError(errorMessage);
+        let errorMessage = 'Failed to send message';
+        if (axios.isAxiosError(err)) {
+            errorMessage = err.response?.data?.error || err.message;
+        }
+        setError(errorMessage);
     } finally {
-      setLoading(false);
-      setInput('');
+        setLoading(false);
+        setInput('');
     }
-  };
-
+};
+  
   return (
     <div className="chat-container">
       <header className="chat-header">
