@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { FiSend } from 'react-icons/fi';
-import './Chat.css';
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { FiSend } from 'react-icons/fi'
+import './Chat.css'
 
 interface Message {
   text: string;
