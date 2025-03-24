@@ -11,8 +11,8 @@ interface Message {
   isUser: boolean;
   id: number;
   details?: {
+    anonymizedPrompt: string;
     raw: string;
-    afterRecontext: string;
     final: string;
   };
 }
@@ -69,8 +69,8 @@ export default function Chat() {
             isUser: false,
             id: Date.now() + 1,
             details: {
+                anonymizedPrompt: response.data.anonymized_prompt,
                 raw: response.data.llm_raw,
-                afterRecontext: response.data.llm_after_recontext,
                 final: response.data.response
             }
         }]);
