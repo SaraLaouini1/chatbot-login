@@ -1,36 +1,14 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Chat from './components/Chat'
-import Login from './components/Login'
-import { useEffect, useState } from 'react'
+
+// src/App.tsx
+import Chat from './components/Chat'; // Add missing import
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token')
-)
-
-    useEffect(() => {
-        const checkAuth = () => {
-            setIsAuthenticated(!!localStorage.getItem('token'))
-        };
-        
-        window.addEventListener('storage', checkAuth)
-        return () => window.removeEventListener('storage', checkAuth)
-    }, [])
-
-    return (
-        <Router>
-            <Routes>
-                <Route 
-                    path="/chat" 
-                    element={isAuthenticated ? <Chat /> : <Navigate to="/login" />} 
-                />
-                <Route 
-                    path="/login" 
-                    element={!isAuthenticated ? <Login /> : <Navigate to="/chat" />} 
-                />
-                <Route path="/" element={<Navigate to="/chat" />} />
-            </Routes>
-        </Router>
-    )
+  return (
+    <div className="App">
+      
+      <Chat /> {/* Now properly imported */}
+    </div>
+  );
 }
 
-export default App
+export default App; // Ensure default export exists
