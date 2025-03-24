@@ -62,6 +62,9 @@ export default function Chat() {
     e.preventDefault();
     if (!input.trim() || loading) return;
     
+    setLoading(true);
+    setError(null);
+
     try {
         // Stringify the payload explicitly
         const payload = JSON.stringify({ prompt: input.trim() });
@@ -73,14 +76,26 @@ export default function Chat() {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
-        // ... rest of your code ...
+
+        setMessages(prev => [...prev, {
+            text: response.data.response,
+            isUser: false,
+            id: Date.now() + 1
+        }]);
+
     } catch (err) {
+        let errorMessage = 'Failed to send message';
         if (axios.isAxiosError(err)) {
             console.error("Full error response:", err.response?.data);
+            errorMessage = err.response?.data?.error || err.message;
         }
-        // ... existing error handling ...
+        setError(errorMessage);
+        console.error(err);
+    } finally {
+        setLoading(false);
+        setInput('');
     }
-}
+};
 
       setMessages(prev => [...prev, {
         text: response.data.response,
