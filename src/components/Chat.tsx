@@ -8,6 +8,11 @@ interface Message {
   text: string;
   isUser: boolean;
   id: number;
+  details?: {
+    raw: string;
+    afterRecontext: string;
+    final: string;
+  };
 }
 
 interface AnonymizationMapping {
@@ -41,11 +46,16 @@ export default function Chat() {
     setError(null);
     
     try {
-      setMessages(prev => [...prev, { 
-        text: input, 
-        isUser: true, 
-        id: Date.now() 
-      }]);
+      setMessages(prev => [...prev, {
+            text: response.data.response,
+            isUser: false,
+            id: Date.now() + 1,
+            details: {
+                raw: response.data.llm_raw,
+                afterRecontext: response.data.llm_after_recontext,
+                final: response.data.response
+            }
+        }]);
 
       const response = await axios.post<{
         response: string;
