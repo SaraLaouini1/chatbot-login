@@ -4,11 +4,16 @@ import Login from './components/Login'
 import { useEffect, useState } from 'react'
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token')
+)
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        setIsAuthenticated(!!token)
+        const checkAuth = () => {
+            setIsAuthenticated(!!localStorage.getItem('token'))
+        };
+        
+        window.addEventListener('storage', checkAuth)
+        return () => window.removeEventListener('storage', checkAuth)
     }, [])
 
     return (
