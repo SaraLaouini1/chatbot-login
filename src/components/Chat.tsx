@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
@@ -21,88 +21,61 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null); // New ref for scrolling
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-
-      try {
-        await axios.get('/verify', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      } catch (err) {
-        localStorage.removeItem('token');
-        navigate('/login');
-      }
-    };
-
-    verifyToken();
-  }, [navigate]);
-
+  // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
     scrollToBottom();
-  }, [messages, loading]);
+  }, [messages, loading]); // Added dependency array
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
-
+    
     setLoading(true);
     setError(null);
-
+    
     try {
-        // Add user message immediately
-        setMessages(prev => [...prev, {
-            text: input,
-            isUser: true,
-            id: Date.now()
-        }]);
+      setMessages(prev => [...prev, { 
+        text: input, 
+        isUser: true, 
+        id: Date.now() 
+      }]);
 
-        // Remove JSON.stringify() and send object directly
-        const response = await axios.post<{
-            response: string;
-            anonymized_prompt: string;
-            mapping: AnonymizationMapping[];
-        }>(API_URL, { prompt: input.trim() }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        });
+      const response = await axios.post<{
+        response: string;
+        anonymized_prompt: string;
+        mapping: AnonymizationMapping[];
+      }>(API_URL, { prompt: input });
 
-        setMessages(prev => [...prev, {
-            text: response.data.response,
-            isUser: false,
-            id: Date.now() + 1
-        }]);
-
+      setMessages(prev => [...prev, {
+        text: response.data.response,
+        isUser: false,
+        id: Date.now() + 1
+      }]);
+      
     } catch (err) {
-        let errorMessage = 'Failed to send message';
-        if (axios.isAxiosError(err)) {
-            errorMessage = err.response?.data?.error || err.message;
-        }
-        setError(errorMessage);
+      let errorMessage = 'Failed to send message';
+      if (axios.isAxiosError(err)) {
+        errorMessage = err.response?.data?.error || err.message;
+      }
+      setError(errorMessage);
+      console.error(err);
     } finally {
-        setLoading(false);
-        setInput('');
+      setLoading(false);
+      setInput('');
     }
-};
-  
+  };
+
   return (
     <div className="chat-container">
       <header className="chat-header">
-        <h1 className="chat-title">Secure Chat</h1>
+        <h1 className="chat-title">Private Prompt</h1>
       </header>
 
       <div className="messages-container">
@@ -120,6 +93,7 @@ export default function Chat() {
             Generating response...
           </div>
         )}
+        {/* Empty div at bottom for scrolling reference */}
         <div ref={messagesEndRef} />
       </div>
 
@@ -153,6 +127,7 @@ export default function Chat() {
             disabled={loading}
             className="chat-input"
           />
+
           <button
             type="submit"
             disabled={loading}
