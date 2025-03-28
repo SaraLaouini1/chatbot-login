@@ -90,7 +90,10 @@ export default function Chat() {
   return (
     <div className="chat-container">
       <header className="chat-header">
-        <h1 className="chat-title">Private Prompt</h1>
+        <div className="title-container">
+          <h1 className="chat-title">Private Prompt</h1>
+          <span className="lock-logo animated-lock" aria-hidden="true">🔒</span>
+        </div>
       </header>
 
       <div className="messages-container">
