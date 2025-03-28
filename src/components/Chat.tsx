@@ -1,6 +1,8 @@
 
+
+
 import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
-import apiClient from '../api/client';
+import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
@@ -55,13 +57,13 @@ export default function Chat() {
             id: Date.now() 
         }]);
 
-        const response = await apiClient.post<{
+        const response = await axios.post<{
             response: string;
             llm_raw: string;
             llm_after_recontext: string;
             anonymized_prompt: string;
             mapping: AnonymizationMapping[];
-        }>('/process', { prompt: input });
+        }>(API_URL, { prompt: input });
 
         // Then add bot response
         setMessages(prev => [...prev, {
