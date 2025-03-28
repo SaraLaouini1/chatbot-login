@@ -1,16 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Chat from './components/Chat';
-import ProtectedRoute from './components/ProtectedRoute';
+
+// src/App.tsx
+import Chat from './components/Chat'; // Add missing import
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
-                <Route path="/" element={<Login />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <div className="App">
+      
+      <Chat /> {/* Now properly imported */}
+    </div>
+  );
 }
+
+export default App; // Ensure default export exists
