@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
-import axios from 'axios';
+import apiClient from '../api/client';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
