@@ -55,13 +55,13 @@ export default function Chat() {
             id: Date.now() 
         }]);
 
-        const response = await axios.post<{
+        const response = await apiClient.post<{
             response: string;
             llm_raw: string;
             llm_after_recontext: string;
             anonymized_prompt: string;
             mapping: AnonymizationMapping[];
-        }>(API_URL, { prompt: input });
+        }>('/process', { prompt: input });
 
         // Then add bot response
         setMessages(prev => [...prev, {
