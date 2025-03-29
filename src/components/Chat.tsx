@@ -16,11 +16,7 @@ interface Message {
   };
 }
 
-interface AnonymizationMapping {
-  type: string;
-  original: string;
-  anonymized: string;
-}
+
 
 export default function Chat() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
