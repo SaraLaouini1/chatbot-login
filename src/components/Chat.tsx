@@ -77,8 +77,18 @@ export default function Chat() {
     }
   };
 
+  // Add mobile-specific touch handling
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touch = e.changedTouches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    
+    if (target?.className.includes('send-button')) {
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <div className={`chat-container ${isMobile ? 'mobile' : 'desktop'}`}>
+    <div className="chat-container" onTouchEnd={handleTouchEnd}>
       <header className="chat-header">
         <div className="title-container">
           <h1 className="chat-title">Private Prompt</h1>
@@ -123,6 +133,10 @@ export default function Chat() {
             placeholder="Type your message..."
             disabled={loading}
             className="chat-input"
+            inputMode="text"
+            enterKeyHint="send"
+            autoCorrect="on"
+            autoCapitalize="sentences"
           />
           <button
             type="submit"
