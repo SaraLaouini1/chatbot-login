@@ -1,12 +1,9 @@
-
-
-
-import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
+import { useState, useRef, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
-
 
 interface Message {
   text: string;
@@ -26,21 +23,17 @@ interface AnonymizationMapping {
 }
 
 export default function Chat() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // New ref for scrolling
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const API_URL = import.meta.env.VITE_API_URL || 'https://your-backend-name.onrender.com/process';
 
-  // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, loading]); // Added dependency array
-
-  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,22 +43,14 @@ export default function Chat() {
     setError(null);
     
     try {
-        // Add user message first
         setMessages(prev => [...prev, { 
             text: input, 
             isUser: true, 
             id: Date.now() 
         }]);
 
-        const response = await axios.post<{
-            response: string;
-            llm_raw: string;
-            llm_after_recontext: string;
-            anonymized_prompt: string;
-            mapping: AnonymizationMapping[];
-        }>(API_URL, { prompt: input });
-
-        // Then add bot response
+        const response = await axios.post(API_URL, { prompt: input });
+        
         setMessages(prev => [...prev, {
             text: response.data.response,
             isUser: false,
@@ -83,12 +68,12 @@ export default function Chat() {
           errorMessage = err.response?.data?.error || err.message;
         }
         setError(errorMessage);
-        console.error(err);
     } finally {
         setLoading(false);
         setInput('');
     }
-};
+  };
+
   return (
     <div className="chat-container">
       <header className="chat-header">
@@ -103,13 +88,14 @@ export default function Chat() {
           <div
             key={msg.id}
             className={`message ${msg.isUser ? 'user' : 'bot'}`}
+            style={{
+              maxWidth: isMobile ? '90%' : '70%',
+              padding: isMobile ? '1rem' : '1.25rem 1.75rem'
+            }}
           >
             {msg.text}
-            {msg.details && (
-              <ResponseDetails details={msg.details} />
-            )}
+            {msg.details && <ResponseDetails details={msg.details} isMobile={isMobile} />}
           </div>
-
         ))}
         {loading && (
           <div className="loading-indicator">
@@ -117,25 +103,13 @@ export default function Chat() {
             Generating response...
           </div>
         )}
-        {/* Empty div at bottom for scrolling reference */}
         <div ref={messagesEndRef} />
       </div>
 
       {error && (
         <div className="error-message">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
           {error}
         </div>
@@ -150,15 +124,21 @@ export default function Chat() {
             placeholder="Type your message..."
             disabled={loading}
             className="chat-input"
+            style={{
+              height: isMobile ? '48px' : 'auto',
+              padding: isMobile ? '0.8rem' : '1.25rem 1.75rem'
+            }}
           />
-
           <button
             type="submit"
             disabled={loading}
             className="send-button"
+            style={{
+              padding: isMobile ? '0.8rem' : '1rem 2rem',
+              minWidth: isMobile ? '48px' : 'auto'
+            }}
           >
-            <FiSend className="send-icon" />
-            Send
+            {isMobile ? <FiSend /> : 'Send'}
           </button>
         </form>
       </div>
