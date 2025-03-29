@@ -339,3 +339,69 @@
   gap: 0.75rem;
   font-size: 0.9rem;
 }
+
+
+
+/* Mobile First Styles */
+.chat-container {
+  --mobile-padding: 1rem;
+  --desktop-padding: 2rem;
+  padding: var(--mobile-padding);
+  border-radius: 16px;
+}
+
+@media (min-width: 768px) {
+  .chat-container {
+    padding: var(--desktop-padding);
+    border-radius: 24px;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  .chat-header {
+    padding: 1rem;
+  }
+  
+  .lock-logo {
+    font-size: 2rem;
+  }
+  
+  .chat-title {
+    font-size: 1.25rem;
+  }
+  
+  .messages-container {
+    padding: 1rem;
+  }
+  
+  .message {
+    max-width: 90%;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .input-container {
+    padding: 1rem;
+  }
+  
+  .chat-input {
+    padding: 0.8rem;
+  }
+  
+  .send-button {
+    padding: 0.8rem;
+  }
+}
+
+/* Touch optimization */
+@media (hover: none) and (pointer: coarse) {
+  .message:hover {
+    transform: none;
+  }
+  
+  .send-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
