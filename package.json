@@ -15,8 +15,8 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^6.22.3",
-    "react-responsive",
-    "@types/react-responsive"
+    "react-responsive": "^9.0.0",
+    "@types/react-responsive": "^9.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
