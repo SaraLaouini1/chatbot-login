@@ -338,7 +338,7 @@
     overflow: visible; /* Allow header to stay on top */
     /*padding-top: 0;*/
     padding-top: 70px; /* Match header height */
-    height: calc(100vh - 70px); /* Adjust total height */
+    height: 100vh;
   }
 
   .chat-container::before {
@@ -371,11 +371,11 @@
     padding: 1rem;
     margin-bottom: 80px;
     /*margin-top: 70px; */
-    padding-top: 0.5rem;
     margin-top: 0; /* Remove previous margin */
-    height: calc(100% - 70px); /* Full available height */
     padding-bottom: 100px; /* Space for input */
     background: #ffffff; /* Solid white instead of transparent */
+    height: 100%; /* Changed from calc(100% - 70px) */
+    padding-top: 70px; /* Add padding to clear fixed header */
   }
 
   .message {
@@ -455,6 +455,7 @@
     padding: 0.5rem;
     height: calc(100% - 60px);
     padding-bottom: 90px;
+    padding-top: 60px; /* Match smaller header height */
   }
 
   .chat-header {
