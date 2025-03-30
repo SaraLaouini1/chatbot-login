@@ -155,7 +155,8 @@
   flex-direction: column;
   gap: 1.5rem;
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background: #ffffff; /* Change from rgba(255,255,255,0.8) */
+  backdrop-filter: none; /* Remove blur effect */
 }
 
 /* Message Bubbles */
