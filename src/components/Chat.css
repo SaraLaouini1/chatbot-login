@@ -327,60 +327,65 @@
 
 
 
-/* Compact Header Styles */
+/* Compact Gold Header */
 .crypto-header {
   background: #1a1c25;
-  padding: 1rem 0.5rem; /* Reduced vertical padding */
+  padding: 0.75rem 0.5rem;
   border-bottom: 1px solid rgba(197, 164, 126, 0.1);
-}
-
-.crypto-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
 }
 
 .crypto-line-top,
 .crypto-line-bottom {
-  font-size: 0.65rem; /* Smaller crypto text */
-  line-height: 1.2; /* Tighter line spacing */
-  margin: 0.2rem 0; /* Reduced margin between lines */
+  font-size: 0.6rem;
+  color: rgba(197, 164, 126, 0.7); /* More visible gold */
+  line-height: 1.1; /* Tight line spacing */
+  margin: 0.1rem 0; /* Minimal vertical space */
+  letter-spacing: 0.03em;
 }
 
 .brand-core {
-  margin: 0.5rem 0; /* Reduced vertical spacing */
+  margin: 0.3rem 0; /* Very tight spacing */
 }
 
 .brand-title {
-  font-size: 1.75rem; /* Slightly smaller title */
-  margin: 0.25rem 0; /* Tighter title margins */
+  font-size: 1.6rem;
+  color: #C5A47E; /* Solid gold color */
+  text-shadow: 0 2px 4px rgba(197, 164, 126, 0.2);
+  margin: 0;
+  line-height: 1; /* No extra line height */
+}
+
+.symbol, .shield, .lock, .key {
+  color: #C5A47E;
+  opacity: 0.9; /* More visible symbols */
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .crypto-header {
-    padding: 0.75rem 0.25rem;
+    padding: 0.5rem 0.25rem;
   }
   
   .brand-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .crypto-line-top,
   .crypto-line-bottom {
-    font-size: 0.55rem;
-    margin: 0.1rem 0;
+    font-size: 0.5rem;
+    line-height: 1;
+    margin: 0.05rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .brand-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   .crypto-line-top,
   .crypto-line-bottom {
-    font-size: 0.45rem;
+    font-size: 0.4rem;
   }
 }
 
