@@ -327,60 +327,83 @@
 
 
 
-/* Updated compact CSS */
+/* Modern Cryptographic Header */
 .crypto-header {
   background: #1a1c25;
-  padding: 1rem 0;
+  padding: 1.5rem 1rem;
   border-bottom: 1px solid rgba(197, 164, 126, 0.1);
 }
 
-.brand-highlight-container {
-  padding: 0.75rem 0;
-  margin: 0.5rem 0;
+.crypto-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.brand-highlight {
-  font-size: 1.5rem; /* Reduced from 2rem */
+.crypto-line-top,
+.crypto-line-bottom {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(197, 164, 126, 0.4);
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-core {
+  margin: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-title {
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
-  padding: 0 1.5rem;
-  letter-spacing: 0.03em; /* Tighter spacing */
+  font-size: 2rem;
+  color: #C5A47E;
+  letter-spacing: -0.5px;
+  margin: 0;
+  background: linear-gradient(45deg, #C5A47E, #E8D5B5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(197, 164, 126, 0.1);
 }
 
-.brand-underline {
-  bottom: -0.3rem;
-  width: 50%; /* Narrower underline */
-  height: 1px; /* Thinner line */
-}
-
-.crypto-line {
-  font-size: 0.7rem; /* Smaller cryptographic text */
-  padding: 0.25rem 1rem;
+.symbol, .shield, .lock, .key {
+  color: #C5A47E;
+  filter: drop-shadow(0 1px 2px rgba(197, 164, 126, 0.2));
+  display: inline-block;
+  margin: 0 0.1rem;
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .crypto-header {
-    padding: 0.75rem 0;
+    padding: 1rem 0.5rem;
   }
   
-  .brand-highlight {
-    font-size: 1.2rem;
-    padding: 0 1rem;
+  .brand-title {
+    font-size: 1.5rem;
   }
   
-  .brand-highlight-container {
-    padding: 0.5rem 0;
+  .crypto-line-top,
+  .crypto-line-bottom {
+    font-size: 0.6rem;
+    white-space: normal;
   }
 }
 
 @media (max-width: 480px) {
-  .brand-highlight {
-    font-size: 1rem;
+  .brand-title {
+    font-size: 1.25rem;
   }
   
-  .crypto-line {
-    font-size: 0.55rem;
-    white-space: normal; /* Allow wrapping */
+  .crypto-line-top,
+  .crypto-line-bottom {
+    font-size: 0.5rem;
   }
 }
 
