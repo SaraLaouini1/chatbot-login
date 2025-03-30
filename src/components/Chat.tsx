@@ -140,6 +140,7 @@ export default function Chat() {
         </div>
       )}
 
+      // Update the input container JSX to add a mobile-friendly class
       <div className="input-container">
         <form onSubmit={handleSubmit} className="input-wrapper">
           <input
@@ -149,15 +150,17 @@ export default function Chat() {
             placeholder="Type your message..."
             disabled={loading}
             className="chat-input"
+            aria-label="Chat input"
           />
-
           <button
             type="submit"
             disabled={loading}
             className="send-button"
+            aria-label="Send message"
           >
             <FiSend className="send-icon" />
-            Send
+            {/* Hide text on mobile */}
+            <span className="desktop-only">Send</span>
           </button>
         </form>
       </div>
