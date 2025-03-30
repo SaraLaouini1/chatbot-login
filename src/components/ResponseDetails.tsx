@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ResponseDetails({ details, isMobile }: { 
+export default function ResponseDetails({ details }: { 
     details: {
         anonymizedPrompt: string;
         raw: string;
@@ -12,16 +12,14 @@ export default function ResponseDetails({ details, isMobile }: {
     return (
         <div className="response-details">
             <button 
-                style={{ fontSize: isMobile ? '0.8rem' : '0.9rem' }}
-              >
-                {expanded ? '▲ Hide' : '▼ Details'}
+                onClick={() => setExpanded(!expanded)}
+                className="toggle-details"
+            >
+                {expanded ? '▲ Hide Details' : '▼ Show Processing Details'}
             </button>
-                    
+            
             {expanded && (
-                <div className="processing-steps" style={{ 
-                      padding: isMobile ? '0.5rem' : '1rem',
-                      fontSize: isMobile ? '0.8rem' : '0.9rem'
-                    }}>
+                <div className="processing-steps">
                     <div className="step">
                         <h4>Anonymized Prompt</h4>
                         <div className="content-block">
