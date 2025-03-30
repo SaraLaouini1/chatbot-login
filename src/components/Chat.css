@@ -352,9 +352,11 @@
   .chat-container {
     max-width: 100%;
     border-radius: 0;
-    height: 100vh;
+    /*height: 100vh;*/
     overflow: visible; /* Allow header to stay on top */
-    padding-top: 0;
+    /*padding-top: 0;*/
+    padding-top: 70px; /* Match header height */
+    height: calc(100vh - 70px); /* Adjust total height */
   }
 
   .chat-container::before {
@@ -372,6 +374,8 @@
     width: 100%;
     padding: 0.75rem 1rem;
     box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    height: 70px; /* Fixed header height */
+    box-sizing: border-box;
   }
 
   .chat-title {
@@ -385,8 +389,11 @@
   .messages-container {
     padding: 1rem;
     margin-bottom: 80px;
-    margin-top: 70px; /* Add space for fixed header */
+    /*margin-top: 70px; */
     padding-top: 0.5rem;
+    margin-top: 0; /* Remove previous margin */
+    height: calc(100% - 70px); /* Full available height */
+    padding-bottom: 100px; /* Space for input */
   }
 
   .message {
@@ -429,6 +436,11 @@
     width: 100%;
     padding: 1rem;
   }
+
+   /* Add scroll margin to first message */
+  .message:first-child {
+    scroll-margin-top: 70px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -447,6 +459,21 @@
 
   .messages-container {
     padding: 0.5rem;
+    height: calc(100% - 60px);
+    padding-bottom: 90px;
+  }
+
+  .chat-header {
+    height: 60px;
+  }
+
+  .message:first-child {
+    scroll-margin-top: 60px;
+  }
+
+  .chat-container {
+    padding-top: 60px;
+    height: calc(100vh - 60px);
   }
 }
 
