@@ -353,6 +353,7 @@
   .chat-header {
     overflow: visible; /* Ensure header content isn't clipped */
     min-height: 60px; /* Ensure enough space for the title */
+    z-index: 1000;
   }
   
   .chat-container {
