@@ -99,26 +99,7 @@
 }
 
 /* Luxury Border Effect */
-.chat-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  padding: 1px; /* Changed from 2px to 1px */
-  background: linear-gradient(
-    45deg,
-    rgba(197, 164, 126, 0.8) 0%,  /* More transparent start */
-    rgba(197, 164, 126, 0.2) 50%
-  );
-  -webkit-mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
+
 
 /* Header */
 .chat-header {
@@ -394,6 +375,7 @@
     margin-top: 0; /* Remove previous margin */
     height: calc(100% - 70px); /* Full available height */
     padding-bottom: 100px; /* Space for input */
+    background: #ffffff; /* Solid white instead of transparent */
   }
 
   .message {
