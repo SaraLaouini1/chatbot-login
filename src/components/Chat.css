@@ -421,7 +421,6 @@
 
   .input-wrapper {
     flex-direction: raw;
-    gap: 0.75rem;
   }
 
   
@@ -502,9 +501,7 @@
     border-radius: 10px;
   }
   
-  .input-wrapper {
-    gap: 0.5rem;
-  }
+ 
 }
 
 /* Add viewport height fix for mobile browsers */
