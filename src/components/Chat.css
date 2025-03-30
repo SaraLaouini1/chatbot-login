@@ -429,8 +429,9 @@
 
   .send-button {
     width: auto;
-    padding: 1rem 1.5rem; /* Compact padding */
-    font-size: 1rem;
+    padding: 0.8rem 1.3rem; /* Compact padding */
+    font-size: 0.8rem;
+    font-weight: 200;
   }
 
 
