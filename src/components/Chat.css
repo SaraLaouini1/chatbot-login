@@ -424,16 +424,12 @@
     gap: 0.75rem;
   }
 
-  .chat-input {
-    padding: 1rem;
-    flex: 1;
-  }
+  
 
   .send-button {
     width: auto;
     padding: 0.875rem 1.25rem; /* Compact padding */
     font-size: 0.9rem;
-    flex-shrink: 0; /* Prevent button from shrinking */
   }
 
 
