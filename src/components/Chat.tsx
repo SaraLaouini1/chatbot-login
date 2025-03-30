@@ -100,25 +100,20 @@ export default function Chat() {
   return (
     <div className="chat-container">
       <header className="crypto-header">
-        <div className="static-crypto-container">
-          <div className="crypto-content">
-            {/* Top cryptographic text */}
-            <div className="crypto-line">Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0QMz!7rGv#K^jpLx82?f<span className="shield">🛡️</span>S09kBMt4q$YpVhHxa%LwNj7Dbc<span className="shield">🛡️</span>T&AV@0qZ94e</div>
-            
-            {/* Centered Brand Name */}
-            <div className="brand-highlight-container">
-              <div className="brand-highlight">
-                Private-Prompt.com
-                <div className="brand-underline"></div>
-              </div>
-            </div>
-            
-            {/* Bottom cryptographic text */}
-            <div className="crypto-line">JG5^hdBn0Tu%lQFjr3ZKmb78$a~d#fHS9Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0Mt4q$YpVhHxa%LwNj7DbcT&0qZ94pRnA<span className="lock">🔒</span>vzke?JG5^hdB0Tu%lQFjr3ZKmb787rG$a~d<span className="key">🔑</span>#fHS9Lg0mzQpizQhUpi<span className="key">🔑</span>4T1GpRnxf</div>
+        <div className="crypto-layout">
+          <div className="crypto-line-top">
+            Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0jpLx82?f<span className="shield">🛡️</span>S09kBMtLwNj7Dbc<span className="shield">🛡️</span>T&AV@0qte
+          </div>
+          
+          <div className="brand-core">
+            <h1 className="brand-title">Private-Prompt</h1>
+          </div>
+      
+          <div className="crypto-line-bottom">
+            JG5^hdBn0Tu%Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0M94pRnA<span className="lock">🔒</span>vzke?JKmb787rG$a~d<span className="key">🔑</span>#fHS9izQhUpi<span className="key">🔑</span>4T1GpRnxf
           </div>
         </div>
       </header>
-
       <div className="messages-container">
         {messages.map((msg) => (
           <div
