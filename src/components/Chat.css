@@ -327,78 +327,62 @@
 
 
 
-/* Updated CSS */
+/* Updated compact CSS */
+.crypto-header {
+  background: #1a1c25;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(197, 164, 126, 0.1);
+}
+
 .brand-highlight-container {
-  position: relative;
-  padding: 1.5rem 0;
-  margin: 1rem 0;
-  background: rgba(197, 164, 126, 0.05);
-  backdrop-filter: blur(2px);
-  border-radius: 8px;
+  padding: 0.75rem 0;
+  margin: 0.5rem 0;
 }
 
 .brand-highlight {
-  color: #C5A47E;
-  font-weight: 800;
-  font-size: 2rem;
-  text-align: center;
-  letter-spacing: 0.05em;
-  text-shadow: 0 2px 8px rgba(197, 164, 126, 0.3);
-  position: relative;
-  display: inline-block;
-  padding: 0 2rem;
-  background: linear-gradient(45deg, #C5A47E 30%, #E8D5B5 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem; /* Reduced from 2rem */
+  font-weight: 700;
+  padding: 0 1.5rem;
+  letter-spacing: 0.03em; /* Tighter spacing */
 }
 
 .brand-underline {
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(197, 164, 126, 0.5) 50%, 
-    transparent 100%
-  );
+  bottom: -0.3rem;
+  width: 50%; /* Narrower underline */
+  height: 1px; /* Thinner line */
 }
 
 .crypto-line {
-  font-size: 0.8rem;
-  color: rgba(197, 164, 126, 0.4);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 1rem;
-  filter: brightness(0.8);
+  font-size: 0.7rem; /* Smaller cryptographic text */
+  padding: 0.25rem 1rem;
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
+  .crypto-header {
+    padding: 0.75rem 0;
+  }
+  
   .brand-highlight {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 0 1rem;
   }
   
   .brand-highlight-container {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .brand-highlight {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   
   .crypto-line {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
+    white-space: normal; /* Allow wrapping */
   }
 }
-
 
 /* Add these media queries at the end of Chat.css */
 
