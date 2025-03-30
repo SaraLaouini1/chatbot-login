@@ -327,65 +327,75 @@
 
 
 
-/* Add to Chat.css */
-.crypto-header {
-  background: #1a1c25;
-  padding: 2rem 1rem;
-  border-bottom: 1px solid rgba(197, 164, 126, 0.15);
-}
-
-.static-crypto-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
+/* Updated CSS */
+.brand-highlight-container {
   position: relative;
-}
-
-.crypto-content {
-  font-family: 'Space Mono', monospace;
-  font-size: 1rem;
-  color: rgba(197, 164, 126, 0.8);
-  text-align: center;
-  line-height: 1.4;
-  white-space: normal;
-  text-shadow: 0 0 8px rgba(197, 164, 126, 0.1);
+  padding: 1.5rem 0;
+  margin: 1rem 0;
+  background: rgba(197, 164, 126, 0.05);
+  backdrop-filter: blur(2px);
+  border-radius: 8px;
 }
 
 .brand-highlight {
   color: #C5A47E;
-  font-weight: 700;
-  margin: 0 1rem;
+  font-weight: 800;
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(197, 164, 126, 0.3);
   position: relative;
   display: inline-block;
+  padding: 0 2rem;
+  background: linear-gradient(45deg, #C5A47E 30%, #E8D5B5 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.symbol, .shield, .lock, .key {
-  color: #C5A47E;
-  filter: drop-shadow(0 0 5px rgba(197, 164, 126, 0.3));
-  display: inline-block;
+.brand-underline {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(197, 164, 126, 0.5) 50%, 
+    transparent 100%
+  );
+}
+
+.crypto-line {
+  font-size: 0.8rem;
+  color: rgba(197, 164, 126, 0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1rem;
+  filter: brightness(0.8);
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
-  .crypto-header {
-    padding: 1.5rem 0.5rem;
-  }
-  
-  .crypto-content {
-    font-size: 0.8rem;
-    white-space: normal;
-    word-break: break-word;
-  }
-  
   .brand-highlight {
-    display: block;
-    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .brand-highlight-container {
+    padding: 1rem 0;
   }
 }
 
 @media (max-width: 480px) {
-  .crypto-content {
-    font-size: 0.7rem;
+  .brand-highlight {
+    font-size: 1.2rem;
+  }
+  
+  .crypto-line {
+    font-size: 0.6rem;
   }
 }
 
