@@ -327,10 +327,10 @@
 
 
 
-/* Modern Cryptographic Header */
+/* Compact Header Styles */
 .crypto-header {
   background: #1a1c25;
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.5rem; /* Reduced vertical padding */
   border-bottom: 1px solid rgba(197, 164, 126, 0.1);
 }
 
@@ -342,68 +342,45 @@
 
 .crypto-line-top,
 .crypto-line-bottom {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  color: rgba(197, 164, 126, 0.4);
-  letter-spacing: 0.05em;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.65rem; /* Smaller crypto text */
+  line-height: 1.2; /* Tighter line spacing */
+  margin: 0.2rem 0; /* Reduced margin between lines */
 }
 
 .brand-core {
-  margin: 1rem 0;
-  position: relative;
-  z-index: 1;
+  margin: 0.5rem 0; /* Reduced vertical spacing */
 }
 
 .brand-title {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #C5A47E;
-  letter-spacing: -0.5px;
-  margin: 0;
-  background: linear-gradient(45deg, #C5A47E, #E8D5B5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px rgba(197, 164, 126, 0.1);
-}
-
-.symbol, .shield, .lock, .key {
-  color: #C5A47E;
-  filter: drop-shadow(0 1px 2px rgba(197, 164, 126, 0.2));
-  display: inline-block;
-  margin: 0 0.1rem;
+  font-size: 1.75rem; /* Slightly smaller title */
+  margin: 0.25rem 0; /* Tighter title margins */
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .crypto-header {
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.25rem;
   }
   
   .brand-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .crypto-line-top,
   .crypto-line-bottom {
-    font-size: 0.6rem;
-    white-space: normal;
+    font-size: 0.55rem;
+    margin: 0.1rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .brand-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
   
   .crypto-line-top,
   .crypto-line-bottom {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
   }
 }
 
