@@ -38,23 +38,8 @@ export default function Chat() {
   }, [messages, loading]); // Added dependency array
 
   const scrollToBottom = () => {
-    setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-    }, 100);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-
-  // Add this useEffect in Chat.tsx to handle mobile viewport quirks
-  useEffect(() => {
-    const handleResize = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -164,17 +149,15 @@ export default function Chat() {
             placeholder="Type your message..."
             disabled={loading}
             className="chat-input"
-            aria-label="Chat input"
           />
+
           <button
             type="submit"
             disabled={loading}
             className="send-button"
-            aria-label="Send message"
           >
             <FiSend className="send-icon" />
-            {/* Hide text on mobile */}
-            <span className="desktop-only">Send</span>
+            Send
           </button>
         </form>
       </div>
