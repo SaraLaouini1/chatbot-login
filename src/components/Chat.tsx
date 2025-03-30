@@ -102,9 +102,19 @@ export default function Chat() {
       <header className="crypto-header">
         <div className="static-crypto-container">
           <div className="crypto-content">
-            <span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0Qx82?f<span className="shield">🛡️</span>S09kBMt4LwNj7Dbc<span className="shield">🛡️</span>
-            <span className="brand-highlight">Private-Prompt.com</span>
-            JG5^hdBn0Tu%g0m4T1G<span className="lock">🔒</span>HxahUbk+W0Mt4pRnA<span className="lock">🔒</span>vzke?mb787rG$a~d<span className="key">🔑</span>#fHSpizQhUpi<span className="key">🔑</span>4T1GpRnxf
+            {/* Top cryptographic text */}
+            <div className="crypto-line">Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0QMz!7rGv#K^jpLx82?f<span className="shield">🛡️</span>S09kBMt4q$YpVhHxa%LwNj7Dbc<span className="shield">🛡️</span>T&AV@0qZ94e</div>
+            
+            {/* Centered Brand Name */}
+            <div className="brand-highlight-container">
+              <div className="brand-highlight">
+                Private-Prompt.com
+                <div className="brand-underline"></div>
+              </div>
+            </div>
+            
+            {/* Bottom cryptographic text */}
+            <div className="crypto-line">JG5^hdBn0Tu%lQFjr3ZKmb78$a~d#fHS9Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0Mt4q$YpVhHxa%LwNj7DbcT&0qZ94pRnA<span className="lock">🔒</span>vzke?JG5^hdB0Tu%lQFjr3ZKmb787rG$a~d<span className="key">🔑</span>#fHS9Lg0mzQpizQhUpi<span className="key">🔑</span>4T1GpRnxf</div>
           </div>
         </div>
       </header>
