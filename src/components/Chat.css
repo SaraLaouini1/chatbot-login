@@ -341,3 +341,113 @@
   gap: 0.75rem;
   font-size: 0.9rem;
 }
+
+
+
+/* Add these media queries at the end of Chat.css */
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 100%;
+    border-radius: 0;
+    height: 100vh;
+  }
+
+  .chat-container::before {
+    border-radius: 0;
+  }
+
+  .messages-container {
+    padding: 1rem;
+  }
+
+  .message {
+    max-width: 85%;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .message.user {
+    border-radius: 16px 16px 4px 16px;
+  }
+
+  .message.bot {
+    border-radius: 4px 16px 16px 16px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .chat-input {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .send-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .chat-title {
+    font-size: 1.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .lock-logo {
+    font-size: 2rem;
+  }
+
+  .processing-steps {
+    padding: 0.5rem;
+  }
+
+  .content-block {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message {
+    max-width: 90%;
+    padding: 0.75rem;
+  }
+
+  .chat-title {
+    font-size: 1.25rem;
+  }
+
+  .lock-logo {
+    font-size: 1.75rem;
+  }
+
+  .send-button {
+    padding: 0.6rem 1rem;
+  }
+
+  .toggle-details {
+    font-size: 0.75rem;
+  }
+}
+
+
+
+/* Add to Chat.css */
+.desktop-only {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .desktop-only {
+    display: none;
+  }
+  
+  .send-icon {
+    margin-right: 0;
+  }
+}
