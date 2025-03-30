@@ -1,10 +1,10 @@
 
+
 import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
-import { useMediaQuery } from 'react-responsive';
 
 
 interface Message {
@@ -25,7 +25,6 @@ interface AnonymizationMapping {
 }
 
 export default function Chat() {
-  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,14 +34,8 @@ export default function Chat() {
 
   // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
-    const scroll = () => {
-      messagesEndRef.current?.scrollIntoView({
-        behavior: "auto",
-        block: "end"
-      });
-    };
-    scroll();
-  }, [messages, loading]);
+    scrollToBottom();
+  }, [messages, loading]); // Added dependency array
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -98,7 +91,10 @@ export default function Chat() {
   return (
     <div className="chat-container">
       <header className="chat-header">
-        <h1 className="chat-title">Private Prompt</h1>
+        <div className="title-container">
+          <h1 className="chat-title">Private Prompt</h1>
+          <span className="lock-logo animated-lock" aria-hidden="true">🔒</span>
+        </div>
       </header>
 
       <div className="messages-container">
@@ -106,14 +102,11 @@ export default function Chat() {
           <div
             key={msg.id}
             className={`message ${msg.isUser ? 'user' : 'bot'}`}
-            style={{
-              maxWidth: isMobile ? '90%' : '70%',
-              padding: isMobile ? '0.8rem' : '1.25rem 1.75rem',
-              fontSize: isMobile ? '0.9rem' : '1rem'
-            }}
           >
             {msg.text}
-            {msg.details && <ResponseDetails details={msg.details} isMobile={isMobile} />}
+            {msg.details && (
+              <ResponseDetails details={msg.details} />
+            )}
           </div>
 
         ))}
@@ -156,22 +149,15 @@ export default function Chat() {
             placeholder="Type your message..."
             disabled={loading}
             className="chat-input"
-            style={{
-              padding: isMobile ? '0.8rem' : '1.25rem 1.75rem',
-              minHeight: '44px' // Mobile touch target
-            }}
           />
 
           <button
             type="submit"
             disabled={loading}
             className="send-button"
-            style={{
-              padding: isMobile ? '0.8rem' : '1rem 2rem',
-              minWidth: isMobile ? '44px' : 'auto'
-            }}
           >
-            {isMobile ? <FiSend /> : 'Send'}
+            <FiSend className="send-icon" />
+            Send
           </button>
         </form>
       </div>
