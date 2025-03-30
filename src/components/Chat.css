@@ -383,12 +383,16 @@
     font-size: 0.9rem;
     padding: 1.25rem; /* Increased from 1rem */
     margin-bottom: 1rem; /* Ensure spacing between messages */
+    overflow: hidden; /* Contain borders */
+    position: relative;
   }
 
   .message.user {
     border-radius: 16px 16px 4px 16px;
-    box-shadow: 0 4px 12px rgba(197, 164, 126, 0.1);
-    border: 1px solid rgba(197, 164, 126, 0.15); /* Match shadow color */
+    border: 1px solid rgba(197, 164, 126, 0.3); /* Increased opacity */
+    box-shadow: 
+      0 4px 12px rgba(197, 164, 126, 0.1),
+      inset 0 0 0 1px rgba(197, 164, 126, 0.1); /* Inner glow */
   }
 
    /* Remove message gradient overlay */
@@ -398,8 +402,10 @@
 
   .message.bot {
     border-radius: 16px 16px 16px 4px;
-    box-shadow: 0 4px 12px rgba(42, 45, 59, 0.05);
-    border: 1px solid rgba(42, 45, 59, 0.1); /* Strengthen border */
+    border: 1px solid rgba(42, 45, 59, 0.15); /* Darker border */
+    box-shadow: 
+      0 4px 12px rgba(42, 45, 59, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Inner highlight */
   }
 
   .input-container {
@@ -452,14 +458,16 @@
   .message {
     max-width: 90%;
     padding: 0.75rem;
+    min-width: 55%; /* Prevent narrow bubbles */
   }
 
   .message.user {
-    border-radius: 14px 14px 4px 14px;
+    border-radius: 14px 14px 3px 14px; /* Sharper corner */
   }
 
   .message.bot {
-    border-radius: 14px 14px 14px 4px;
+    border-radius: 14px 14px 14px 3px;
+    border-width: 1.2px; /* Slightly thicker */
   }
 
   .messages-container {
