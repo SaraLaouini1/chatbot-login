@@ -99,10 +99,14 @@ export default function Chat() {
 };
   return (
     <div className="chat-container">
+      // In your Chat.tsx component
       <header className="chat-header">
-        <div className="title-container">
-          <h1 className="chat-title">Private Prompt</h1>
-          <span className="lock-logo animated-lock" aria-hidden="true">🔒</span>
+        <div className="luxury-logo-container">
+          <div className="luxury-logo">
+            Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0QMz!7rGv#K^jpLx82?f<span className="shield">🛡️</span>S09kBMt4q$YpVhHxa%LwNj7Dbc<span className="shield">🛡️</span>T&AV@0qZ94e
+            <span className="brand-highlight">Private-Prompt.com</span>
+            JG5^hdBn0Tu%lQFjr3ZKmb78$a~d#fHS9Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0Mt4q$YpVhHxa%LwNj7DbcT&0qZ94pRnA<span className="lock">🔒</span>vzke?JG5^hdB0Tu%lQFjr3ZKmb787rG$a~d<span className="key">🔑</span>#fHS9Lg0mzQpizQhUpi<span className="key">🔑</span>4T1GpRnxf
+          </div>
         </div>
       </header>
 
