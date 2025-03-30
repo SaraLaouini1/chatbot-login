@@ -41,6 +41,15 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  /* Add to Chat.tsx component */
+  useEffect(() => {
+    // Initial scroll to top fix
+    setTimeout(() => {
+      const firstMessage = document.querySelector('.message');
+      firstMessage?.scrollIntoView({ behavior: 'auto' });
+    }, 100);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
