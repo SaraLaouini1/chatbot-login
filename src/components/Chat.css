@@ -354,12 +354,15 @@
     overflow: visible; /* Ensure header content isn't clipped */
     min-height: 60px; /* Ensure enough space for the title */
     z-index: 1000;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
   }
   
   .chat-container {
     max-width: 100%;
     border-radius: 0;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); /* Replace 100vh */
   }
 
   .chat-container::before {
@@ -368,6 +371,7 @@
 
   .messages-container {
     padding: 1rem;
+    height: calc(100% - 120px); /* Adjust based on header/input height */
   }
 
   .message {
@@ -391,8 +395,8 @@
   }
 
   .chat-input {
-    padding: 1rem;
-    font-size: 0.9rem;
+    font-size: 16px; /* Prevent iOS zoom */
+    transform: scale(0.98); /* Fix Android font scaling */
   }
 
   .send-button {
