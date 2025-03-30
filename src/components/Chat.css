@@ -383,8 +383,8 @@
     font-size: 0.9rem;
     padding: 1.25rem; /* Increased from 1rem */
     margin-bottom: 1rem; /* Ensure spacing between messages */
-    overflow: hidden; /* Contain borders */
     position: relative;
+    overflow: visible;
   }
 
   .message.user {
@@ -420,7 +420,8 @@
   }
 
   .input-wrapper {
-    flex-direction: raw;
+    flex-direction: row;
+    padding: 0 1rem;
   }
 
   
