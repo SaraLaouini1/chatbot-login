@@ -380,13 +380,15 @@
 
   .message {
     max-width: 85%;
-    padding: 1rem;
     font-size: 0.9rem;
+    padding: 1.25rem; /* Increased from 1rem */
+    margin-bottom: 1rem; /* Ensure spacing between messages */
   }
 
   .message.user {
     border-radius: 16px 16px 4px 16px;
     box-shadow: 0 4px 12px rgba(197, 164, 126, 0.1);
+    border: 1px solid rgba(197, 164, 126, 0.15); /* Match shadow color */
   }
 
    /* Remove message gradient overlay */
@@ -395,8 +397,9 @@
   }
 
   .message.bot {
-    border-radius: 4px 16px 16px 16px;
+    border-radius: 16px 16px 16px 4px;
     box-shadow: 0 4px 12px rgba(42, 45, 59, 0.05);
+    border: 1px solid rgba(42, 45, 59, 0.1); /* Strengthen border */
   }
 
   .input-container {
@@ -449,6 +452,14 @@
   .message {
     max-width: 90%;
     padding: 0.75rem;
+  }
+
+  .message.user {
+    border-radius: 14px 14px 4px 14px;
+  }
+
+  .message.bot {
+    border-radius: 14px 14px 14px 4px;
   }
 
   .messages-container {
