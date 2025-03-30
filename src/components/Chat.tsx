@@ -140,7 +140,6 @@ export default function Chat() {
         </div>
       )}
 
-      // Update the input container JSX to add a mobile-friendly class
       <div className="input-container">
         <form onSubmit={handleSubmit} className="input-wrapper">
           <input
