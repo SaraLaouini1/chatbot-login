@@ -38,8 +38,11 @@ export default function Chat() {
   }, [messages, loading]); // Added dependency array
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }, 100);
   };
+
 
   // Add this useEffect in Chat.tsx to handle mobile viewport quirks
   useEffect(() => {
