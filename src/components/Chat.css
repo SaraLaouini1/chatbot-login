@@ -328,62 +328,77 @@
 
 
 /* Add to Chat.css */
-.luxury-logo-container {
+.crypto-header {
+  background: #1a1c25;
+  padding: 2rem 0;
   position: relative;
+  border-bottom: 1px solid rgba(197, 164, 126, 0.15);
   overflow: hidden;
-  padding: 1rem 2rem;
-  background: linear-gradient(145deg, #2A2D3B 0%, #1A1C25 100%);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
 
-.luxury-logo {
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.9);
+.crypto-overflow-container {
   position: relative;
-  background: linear-gradient(45deg, #C5A47E 30%, #E8D5B5 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px rgba(197, 164, 126, 0.2);
-  white-space: nowrap;
-  animation: text-scroll 40s linear infinite;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
 }
 
-.brand-highlight {
-  font-weight: 700;
+.crypto-matrix {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: rgba(197, 164, 126, 0.8);
+  white-space: nowrap;
+  position: absolute;
+  animation: matrix-scroll 40s linear infinite;
+  padding-right: 2rem;
+  text-shadow: 0 0 8px rgba(197, 164, 126, 0.1);
+}
+
+.brand-glow {
   color: #C5A47E;
-  margin: 0 0.5rem;
+  font-weight: 700;
+  margin: 0 2rem;
+  text-shadow: 0 0 15px rgba(197, 164, 126, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .symbol, .shield, .lock, .key {
   color: #C5A47E;
-  filter: drop-shadow(0 2px 4px rgba(197, 164, 126, 0.3));
-  animation: symbol-pulse 2s ease-in-out infinite;
+  animation: crypto-pulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(197, 164, 126, 0.3));
 }
 
-@keyframes text-scroll {
-  0% { transform: translateX(20%); }
+@keyframes matrix-scroll {
+  0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
 }
 
-@keyframes symbol-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 1; }
+@keyframes crypto-pulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
-/* Mobile version */
+/* Mobile Optimization */
 @media (max-width: 768px) {
-  .luxury-logo {
-    font-size: 0.7rem;
-    animation-duration: 25s;
+  .crypto-header {
+    padding: 1.5rem 0;
   }
   
-  .luxury-logo-container {
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
+  .crypto-matrix {
+    font-size: 0.9rem;
+    animation-duration: 30s;
+  }
+  
+  .brand-glow {
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .crypto-matrix {
+    font-size: 0.7rem;
+    animation-duration: 25s;
   }
 }
 
