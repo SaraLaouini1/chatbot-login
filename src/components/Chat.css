@@ -374,8 +374,9 @@
     margin-top: 0; /* Remove previous margin */
     padding-bottom: 100px; /* Space for input */
     background: #ffffff; /* Solid white instead of transparent */
-    height: 100%; /* Changed from calc(100% - 70px) */
+    /*height: 100%;  */
     padding-top: 70px; /* Add padding to clear fixed header */
+    height: calc(100vh - 150px); /* Adjusted mobile height */
   }
 
   .message {
@@ -435,6 +436,9 @@
 
   .content-block {
     background: #fafafa !important; /* Was rgba(250,250,250,0.95) */
+  }
+  .chat-input {
+    max-width: calc(100% - 80px);
   }
 
    /* Add scroll margin to first message */
