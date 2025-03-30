@@ -330,75 +330,62 @@
 /* Add to Chat.css */
 .crypto-header {
   background: #1a1c25;
-  padding: 2rem 0;
-  position: relative;
+  padding: 2rem 1rem;
   border-bottom: 1px solid rgba(197, 164, 126, 0.15);
-  overflow: hidden;
 }
 
-.crypto-overflow-container {
+.static-crypto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
   position: relative;
-  width: 100%;
-  height: 60px;
-  overflow: hidden;
 }
 
-.crypto-matrix {
+.crypto-content {
   font-family: 'Space Mono', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgba(197, 164, 126, 0.8);
-  white-space: nowrap;
-  position: absolute;
-  animation: matrix-scroll 40s linear infinite;
-  padding-right: 2rem;
+  text-align: center;
+  line-height: 1.4;
+  white-space: normal;
   text-shadow: 0 0 8px rgba(197, 164, 126, 0.1);
 }
 
-.brand-glow {
+.brand-highlight {
   color: #C5A47E;
   font-weight: 700;
-  margin: 0 2rem;
-  text-shadow: 0 0 15px rgba(197, 164, 126, 0.4);
+  margin: 0 1rem;
   position: relative;
-  z-index: 1;
+  display: inline-block;
 }
 
 .symbol, .shield, .lock, .key {
   color: #C5A47E;
-  animation: crypto-pulse 1.5s ease-in-out infinite;
   filter: drop-shadow(0 0 5px rgba(197, 164, 126, 0.3));
-}
-
-@keyframes matrix-scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-@keyframes crypto-pulse {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
+  display: inline-block;
 }
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .crypto-header {
-    padding: 1.5rem 0;
+    padding: 1.5rem 0.5rem;
   }
   
-  .crypto-matrix {
-    font-size: 0.9rem;
-    animation-duration: 30s;
+  .crypto-content {
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: break-word;
   }
   
-  .brand-glow {
-    margin: 0 1rem;
+  .brand-highlight {
+    display: block;
+    margin: 0.5rem 0;
   }
 }
 
 @media (max-width: 480px) {
-  .crypto-matrix {
+  .crypto-content {
     font-size: 0.7rem;
-    animation-duration: 25s;
   }
 }
 
