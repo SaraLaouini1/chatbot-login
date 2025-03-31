@@ -32,28 +32,45 @@ export default function Chat() {
   const inputContainerRef = useRef<HTMLDivElement>(null);
 
 
-  // Update the useEffect to measure both header and input container heights
+  // Update the height measurement useEffect
   useEffect(() => {
     const updateHeights = () => {
-      if (headerRef.current && inputContainerRef.current) {
-        const headerHeight = headerRef.current.offsetHeight;
-        const inputHeight = inputContainerRef.current.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-        document.documentElement.style.setProperty('--input-height', `${inputHeight}px`);
-      }
+      requestAnimationFrame(() => {
+        if (headerRef.current && inputContainerRef.current) {
+          const headerHeight = headerRef.current.offsetHeight;
+          const inputHeight = inputContainerRef.current.offsetHeight;
+          document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+          document.documentElement.style.setProperty('--input-height', `${inputHeight}px`);
+        }
+      });
     };
-
-    // Initial measurement
+  
     updateHeights();
-
-    // Update on window resize
     window.addEventListener('resize', updateHeights);
     return () => window.removeEventListener('resize', updateHeights);
-  }, [headerRef.current, inputContainerRef.current]);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
+
+
+  useEffect(() => {
+  // Add initial welcome message
+  setMessages([{
+    text: "Hello! How can I assist you today!",
+    isUser: false,
+    id: Date.now(),
+    details: {
+      anonymizedPrompt: "",
+      raw: "",
+      final: ""
+    }
+  }]);
+}, []);
+
+
+  
 
   useEffect(() => {
     setTimeout(() => {
@@ -68,6 +85,8 @@ export default function Chat() {
     
     setLoading(true);
     setError(null);
+
+    
     
     try {
       setMessages(prev => [
@@ -112,12 +131,18 @@ export default function Chat() {
   return (
     <div className="chat-container">
       {/* Header with a ref so we can measure its height */}
+      {/* In Chat.tsx header component */}
       <header className="chat-header" ref={headerRef}>
         <div className="header-content">
           <p className="logo-text">
-            Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
+            {/* Add aria-hidden to decorative elements */}
+            <span aria-hidden="true" className="decorative-text">
+              Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
+            </span>
             <span className="private-prompt">Private Prompt</span>
-            .comJaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
+            <span aria-hidden="true" className="decorative-text">
+              .comJaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
+            </span>
           </p>
         </div>
       </header>
