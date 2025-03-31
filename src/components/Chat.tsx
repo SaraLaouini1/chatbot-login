@@ -71,7 +71,6 @@ export default function Chat() {
           details: {
             anonymizedPrompt: response.data.anonymized_prompt,
             raw: response.data.llm_raw,
-            final: response.data.response
           }
         }
       ]);
