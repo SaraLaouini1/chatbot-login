@@ -23,23 +23,26 @@
 
 /* Responsive Header */
 .chat-header {
-  position: fixed;
+  position: fixed; /* Change from sticky to fixed */
   top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
   height: 60px;
-  padding: 0 1rem;
   background: #ffffff;
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
   z-index: 1000;
+  width: 100%;
 }
 
 .title-container {
-  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0 1rem;
+  justify-content: center; /* Center items in container */
+  width: auto; /* Remove full width */
 }
 
 .lock-logo {
@@ -49,9 +52,13 @@
 
 .chat-title {
   font-size: 1.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--text-primary);
+  /* Remove text gradient for better readability */
+  margin: 0;
+  /* Add these properties for perfect centering */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Messages Area Improvements */
