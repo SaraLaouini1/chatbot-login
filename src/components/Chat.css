@@ -423,19 +423,19 @@
 @media (max-width: 768px) {
   /* Use sticky header so its height remains in the flow */
   .chat-header {
-    position: sticky !important; /* Force sticky positioning */
+    position: sticky;
     top: 0;
-    background: #0a0a0f; /* Ensure opaque background */
+    left: 0;
+    right: 0;
     z-index: 1000;
-    padding: 0.3rem 0;
+    padding: 0.75rem 1rem;
   }
 
   /* Remove any margin-top so messages appear right after the header */
   .messages-container {
-    margin-top: 3.5rem !important; /* Adjust based on header height */
-    padding-top: 1rem;
-    padding-bottom: 80px; /* Space for fixed input */
-    min-height: calc(100vh - 3.5rem - 80px); /* Viewport - header - input */
+    margin-top: 0;
+    padding-top: 1rem; /* Optional extra spacing */
+    overflow-y: auto;
   }
 
   /* Input container remains fixed at the bottom */
@@ -444,6 +444,10 @@
     bottom: 0;
     left: 0;
     right: 0;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
     z-index: 1000;
   }
 
