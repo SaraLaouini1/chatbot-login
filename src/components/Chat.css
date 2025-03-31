@@ -53,12 +53,13 @@
 
 .decorative-left, .decorative-right {
   font-size: 0.7rem;
-  opacity: 0.4;
+  /*opacity: 0.4;*/
   letter-spacing: 0.1em;
   max-width: 90%;
   text-align: center;
   line-height: 1.2;
-  color: white
+  opacity: 0.6; /* Increased opacity for better visibility */
+  color: rgba(197, 164, 126, 0.6); /* Gold color with transparency */
 }
 
 @keyframes text-glow {
