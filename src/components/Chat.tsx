@@ -102,7 +102,6 @@ export default function Chat() {
               <span className="lock-icon">🔒</span>
               <span className="gradient-text">Private Prompt</span>
               <span className="lock-icon">🔒</span>
-              <span className="domain">.com</span>
             </h1>
             <span className="decorative-right">
               JaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
