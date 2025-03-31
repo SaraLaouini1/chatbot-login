@@ -16,6 +16,11 @@
   text-align: center;
 }
 
+.private-prompt {
+  font-weight: bold;
+}
+
+
 .logo-text {
   margin: 0;
   font-size: 1.2rem;
