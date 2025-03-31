@@ -12,7 +12,6 @@ interface Message {
   details?: {
     anonymizedPrompt: string;
     raw: string;
-    final: string;
   };
 }
 
