@@ -390,8 +390,8 @@
     height: 100vh;
     max-width: 100vw;
     border-radius: 0;
-    padding-top: 70px; /* Add space for fixed header */
     overflow: visible; /* Allow header to stay fixed */
+    padding-top: 70px; /* 70px should match your header height */
   }
 
   .crypto-header {
