@@ -93,7 +93,9 @@ export default function Chat() {
       <header className="chat-header">
         <div className="header-content">
           <p className="logo-text">
-            Idee de Logo: Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nryn0QMz!7rGv#K^jpLx82?f🛡️S09kBMt4q$YpVhHxa%LwNj7Dbc🛡️T&AV@0qZ94ePrivate-Prompt.comJa~d#fHS9Lg0m4T1G🔒HxahUbkNj7DbcT&0qZ94pRnA🔒vzke?JG5^hdb787rG$a~d🔑#fHS9Lg0mzQpizQhUpi🔑4T1GpRnxf
+            Idee de Logo: Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nryn0QMz!7rGv#K^jpLx82?f🛡️S09kBMt4q$YpVhHxa%LwNj7Dbc🛡️T&AV@0qZ94e
+            <span className="private-prompt">Private Prompt</span>
+            .comJa~d#fHS9Lg0m4T1G🔒HxahUbkNj7DbcT&0qZ94pRnA🔒vzke?JG5^hdb787rG$a~d🔑#fHS9Lg0mzQpizQhUpi🔑4T1GpRnxf
           </p>
         </div>
       </header>
