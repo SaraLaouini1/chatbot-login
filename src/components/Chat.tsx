@@ -27,7 +27,16 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+
+  // Update CSS variable for header height
+  useEffect(() => {
+    if (headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    }
+  }, [headerRef.current, /* optionally include header content changes */]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -89,8 +98,8 @@ export default function Chat() {
 
   return (
     <div className="chat-container">
-      {/* Single header with logo/branding text */}
-      <header className="chat-header">
+      {/* Header with a ref so we can measure its height */}
+      <header className="chat-header" ref={headerRef}>
         <div className="header-content">
           <p className="logo-text">
             Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
