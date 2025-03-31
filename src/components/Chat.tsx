@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
@@ -27,50 +28,11 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
-  const inputContainerRef = useRef<HTMLDivElement>(null);
-
-
-  // Update the height measurement useEffect
-  useEffect(() => {
-    const updateHeights = () => {
-      requestAnimationFrame(() => {
-        if (headerRef.current && inputContainerRef.current) {
-          const headerHeight = headerRef.current.offsetHeight;
-          const inputHeight = inputContainerRef.current.offsetHeight;
-          document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-          document.documentElement.style.setProperty('--input-height', `${inputHeight}px`);
-        }
-      });
-    };
-  
-    updateHeights();
-    window.addEventListener('resize', updateHeights);
-    return () => window.removeEventListener('resize', updateHeights);
-  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
-
-
-  useEffect(() => {
-  // Add initial welcome message
-  setMessages([{
-    text: "Hello! How can I assist you today!",
-    isUser: false,
-    id: Date.now(),
-    details: {
-      anonymizedPrompt: "",
-      raw: "",
-      final: ""
-    }
-  }]);
-}, []);
-
-
-  
 
   useEffect(() => {
     setTimeout(() => {
@@ -85,8 +47,6 @@ export default function Chat() {
     
     setLoading(true);
     setError(null);
-
-    
     
     try {
       setMessages(prev => [
@@ -130,19 +90,13 @@ export default function Chat() {
 
   return (
     <div className="chat-container">
-      {/* Header with a ref so we can measure its height */}
-      {/* In Chat.tsx header component */}
-      <header className="chat-header" ref={headerRef}>
+      {/* Single header with logo/branding text */}
+      <header className="chat-header">
         <div className="header-content">
           <p className="logo-text">
-            {/* Add aria-hidden to decorative elements */}
-            <span aria-hidden="true" className="decorative-text">
-              Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
-            </span>
+            Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
             <span className="private-prompt">Private Prompt</span>
-            <span aria-hidden="true" className="decorative-text">
-              .comJaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
-            </span>
+            .comJaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
           </p>
         </div>
       </header>
