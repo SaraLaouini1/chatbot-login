@@ -3,9 +3,26 @@
 .chat-header {
   display: flex;
   justify-content: center;
-  padding: 1rem;
-  background: #ffffff;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-content {
+  width: 100%;
+  text-align: center;
+}
+
+.logo-text {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  /* Adjust as needed for readability */
+  overflow-wrap: break-word;
 }
 
 .title-container {
@@ -102,18 +119,6 @@
 /* Luxury Border Effect */
 
 
-/* Header */
-.chat-header {
-  padding: 1.5rem 2rem;
-  background: var(--primary-color);
-  color: white;
-  position: relative;
-  overflow: hidden;
-  display: flex; /* Add this */
-  justify-content: center; /* Add this */
-  align-items: center; /* Add this */
-  text-align: center; /* Add this */
-}
 
 .chat-header::after {
   content: '';
@@ -122,12 +127,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 25%,
-    rgba(197, 164, 126, 0.1) 50%,
-    transparent 75%
-  );
+  background: linear-gradient(45deg, transparent 25%, rgba(197, 164, 126, 0.1) 50%, transparent 75%);
   animation: shimmer 8s infinite linear;
 }
 
@@ -155,9 +155,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.8);
-  background: #ffffff; /* Change from rgba(255,255,255,0.8) */
-  backdrop-filter: none; /* Remove blur effect */
+  background: #ffffff;
+  backdrop-filter: none;
 }
 
 /* Message Bubbles */
@@ -328,151 +327,43 @@
 
 
 
-/* Modern Cryptographic Header */
-.crypto-header {
-  background: #1a1c25;
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid rgba(197, 164, 126, 0.1);
-}
-
-.crypto-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.crypto-line-top,
-.crypto-line-bottom {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  color: rgba(197, 164, 126, 0.4);
-  letter-spacing: 0.05em;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.brand-core {
-  margin: 1rem 0;
-  position: relative;
-  z-index: 1;
-}
-
-.brand-title {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #C5A47E;
-  letter-spacing: -0.5px;
-  margin: 0;
-  background: linear-gradient(45deg, #C5A47E, #E8D5B5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px rgba(197, 164, 126, 0.1);
-}
-
-.symbol, .shield, .lock, .key {
-  color: #C5A47E;
-  filter: drop-shadow(0 1px 2px rgba(197, 164, 126, 0.2));
-  display: inline-block;
-  margin: 0 0.1rem;
-}
-
 
 /* Add these media queries at the end of Chat.css */
 
 /* Mobile First Adjustments */
 @media (max-width: 768px) {
-  /* Base Container Adjustments */
   .chat-container {
     height: 100vh;
     max-width: 100vw;
     border-radius: 0;
-    overflow: visible; /* Allow header to stay fixed */
-    padding-top: 70px; /* 70px should match your header height */
+    overflow: visible;
+    padding-top: 70px; /* Matches fixed header height */
   }
 
-  .crypto-header {
+  /* Fixed Header for Mobile */
+  .chat-header {
     position: fixed;
-    top: 0; /* Set to 0 so it starts at the very top */
+    top: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 1000; /* Increase if needed */
-    background: #1a1c25;
-    padding: 0.5rem;
+    height: 70px;
+    padding: 0.75rem 1rem;
+    background: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
   }
 
-  .brand-title {
-    font-size: 1.4rem;
-    letter-spacing: -0.3px;
+  .logo-text {
+    font-size: 1rem; /* Slightly smaller on mobile */
   }
 
-  /* Messages Container */
   .messages-container {
-    padding: 70px 1rem 80px; /* 70px top to account for header, 80px bottom for the input */
+    padding: 70px 1rem 80px; /* Top padding equals header height */
     height: calc(100vh - 70px - 80px);
     margin: 0;
     background: #fff;
   }
-
-  /* Message Bubbles */
-  .message {
-    padding: 0.8rem 1.1rem; /* Reduced message padding */
-    border-radius: 16px; /* Smaller radius */
-  }
-
-  .message.user {
-    border-radius: 18px 18px 4px 18px;
-  }
-
-  .message.bot {
-    border-radius: 4px 18px 18px 18px;
-  }
-
-  /* Input Section */
-  .input-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0.75rem;
-    background: #fff;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 -2px 12px rgba(0,0,0,0.05);
-  }
-
-  .input-wrapper {
-    gap: 0.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .chat-input {
-    padding: 0.7rem 1.1rem; /* Reduced from 0.75rem 1.2rem */
-    font-size: 0.95rem;
-    border-radius: 14px; /* Slightly smaller radius */
-  }
-
-  .send-button {
-    padding: 0.6rem 1rem; /* Reduced from 0.75rem 1rem */
-    font-size: 0.85rem;
-    border-radius: 14px;
-    min-width: 60px; /* Smaller minimum width */
-    
-  }
-
-  /* Crypto Header Adjustments */
-  .crypto-line-top,
-  .crypto-line-bottom {
-    font-size: 0.6rem;
-    letter-spacing: 0.03em;
-  }
-
-  
 }
-
 
 @media (max-width: 480px) {
   .chat-input {
@@ -573,5 +464,12 @@
 
   .chat-input {
     min-height: 40px;
+  }
+}
+
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }
