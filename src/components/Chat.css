@@ -321,18 +321,18 @@
 }
 
 /* MOBILE FIRST ADJUSTMENTS */
+/* MOBILE FIRST ADJUSTMENTS */
 @media (max-width: 768px) {
   .chat-container {
     height: 100vh;
     max-width: 100vw;
     border-radius: 0;
     overflow: visible;
-    /* No need for extra top padding since header is in flow */
   }
 
-  /* Sticky Header for Mobile (no fixed height) */
+  /* Changed from sticky to relative for mobile */
   .chat-header {
-    position: sticky;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -351,7 +351,6 @@
   .messages-container {
     padding-top: 1rem; /* default extra space */
     padding-bottom: 80px; /* Reserve space for fixed input */
-    /* Removing explicit height calc lets flexbox manage the space */
     margin-top: 0.5rem;
     background: #fff;
     flex: 1;
@@ -371,6 +370,7 @@
     z-index: 1000;
   }
 }
+
 
 @media (max-width: 480px) {
   .chat-input {
