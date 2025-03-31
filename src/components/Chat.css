@@ -2,7 +2,7 @@
 .chat-header {
   background: #0a0a0f;
   border-bottom: 1px solid rgba(197, 164, 126, 0.1);
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -13,25 +13,25 @@
     transparent 0%, 
     var(--gold-accent) 50%, 
     transparent 100%);
-  margin: 0.5rem 0;
   opacity: 0.6;
+  margin: 0.3rem 0; /* Tighter border spacing */
 }
 
 .brand-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0;
+  gap: 0.3rem;
+  padding: 0.5rem 0;
 }
 
 .brand-title {
-  font-size: 2rem;
   letter-spacing: 0.1em;
-  margin: 0;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  font-size: 1.8rem; /* Slightly smaller title */
+  gap: 0.8rem;
+  margin: 0.2rem 0; /* Reduced margin */
 }
 
 .gradient-text {
@@ -52,14 +52,13 @@
 }
 
 .decorative-left, .decorative-right {
-  font-size: 0.7rem;
-  /*opacity: 0.4;*/
   letter-spacing: 0.1em;
-  max-width: 90%;
   text-align: center;
-  line-height: 1.2;
+  font-size: 0.65rem; /* Slightly smaller text */
   opacity: 0.6; /* Increased opacity for better visibility */
   color: rgba(197, 164, 126, 0.6); /* Gold color with transparency */
+  line-height: 1.1;
+  max-width: 85%;
 }
 
 @keyframes text-glow {
@@ -74,13 +73,16 @@
 
 @media (max-width: 768px) {
   .brand-title {
-    font-size: 1.5rem;
-    gap: 0.5rem;
+    font-size: 1.3rem;
+    gap: 0.4rem;
   }
   
   .decorative-left, .decorative-right {
-    font-size: 0.6rem;
-    line-height: 1.1;
+    font-size: 0.55rem;
+    line-height: 1;
+  }
+  .chat-header {
+    padding: 0.3rem 0;
   }
 }
 
