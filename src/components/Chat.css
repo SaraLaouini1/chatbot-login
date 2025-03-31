@@ -327,21 +327,28 @@
 
 /* MOBILE FIRST ADJUSTMENTS */
 @media (max-width: 768px) {
-  /* Use sticky header so its height remains in the flow */
+  /* Fixed header on mobile using the CSS variable for its height */
   .chat-header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
     padding: 0.75rem 1rem;
+    /* no fixed height – its height is determined by content */
   }
 
-  /* Remove any margin-top so messages appear right after the header */
+  /* Messages container pushed down by header height */
   .messages-container {
-    margin-top: 0;
-    padding-top: 1rem; /* Optional extra spacing */
+    position: fixed;
+    top: var(--header-height);
+    bottom: var(--input-height);
+    left: 0;
+    right: 0;
     overflow-y: auto;
+    padding: 1rem;
+    background: #ffffff;
+    z-index: 1;
   }
 
   /* Input container remains fixed at the bottom */
@@ -358,15 +365,17 @@
   }
 
   .chat-container {
-    height: 100vh;
-    max-width: 100vw;
-    border-radius: 0;
     overflow: hidden;
   }
 
   .logo-text {
     font-size: 1rem;
   }
+}
+
+/* Add transition for height changes */
+.chat-header, .input-container {
+  transition: height 0.3s ease;
 }
 
 
