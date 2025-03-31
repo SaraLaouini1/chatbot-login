@@ -4,7 +4,6 @@ export default function ResponseDetails({ details }: {
     details: {
         anonymizedPrompt: string;
         raw: string;
-        final: string;
     }
 }) {
     const [expanded, setExpanded] = useState(false);
@@ -34,12 +33,6 @@ export default function ResponseDetails({ details }: {
                         </div>
                     </div>
                     
-                    <div className="step">
-                        <h4>After Recontextualization</h4>
-                        <div className="content-block">
-                            {details.final}
-                        </div>
-                    </div>
                 </div>
             )}
         </div>
