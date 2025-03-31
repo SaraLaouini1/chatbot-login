@@ -423,7 +423,8 @@
 @media (max-width: 768px) {
   /* Use sticky header so its height remains in the flow */
   .chat-header {
-    position: sticky;
+    /*position: sticky;*/
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -436,6 +437,7 @@
     margin-top: 0;
     padding-top: 1rem; /* Optional extra spacing */
     overflow-y: auto;
+    flex: 1;
   }
 
   /* Input container remains fixed at the bottom */
