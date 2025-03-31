@@ -93,11 +93,22 @@ export default function Chat() {
       {/* Single header with logo/branding text */}
       <header className="chat-header">
         <div className="header-content">
-          <p className="logo-text">
-            Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
-            <span className="private-prompt">Private Prompt</span>
-            .comJaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
-          </p>
+          <div className="cyber-border"></div>
+          <div className="brand-container">
+            <span className="decorative-left">
+              Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nrynLx82?f🛡️S09k%LwNj7Dbc🛡️T&AV@0qZ94e
+            </span>
+            <h1 className="brand-title">
+              <span className="lock-icon">🔒</span>
+              <span className="gradient-text">Private Prompt</span>
+              <span className="lock-icon">🔒</span>
+              <span className="domain">.com</span>
+            </h1>
+            <span className="decorative-right">
+              JaS9Lg0m4T1G🔒HxahUbkNZ94pRnA🔒vzke?JG5rG$a~d🔑#fHS9LQhUpi🔑4T1GpRnxf
+            </span>
+          </div>
+          <div className="cyber-border"></div>
         </div>
       </header>
 
