@@ -460,14 +460,14 @@
   }
 
   .chat-input {
-    padding: 0.8rem 1.2rem;
+    padding: 0.75rem 1rem;;
     min-height: 44px;
     border-radius: 1.2rem;
     font-size: 16px;
   }
 
   .send-button {
-    padding: 0.8rem 1.2rem;
+    padding: 0.75rem 1rem;;
     border-radius: 1.2rem;
     font-size: 0.9rem;
     min-width: 64px;
