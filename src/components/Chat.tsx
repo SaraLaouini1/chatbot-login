@@ -1,11 +1,8 @@
-
-
-import { useState, useRef, useEffect } from 'react'; // Added useRef and useEffect
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
-
 
 interface Message {
   text: string;
@@ -29,21 +26,14 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // New ref for scrolling
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
-  // Auto-scroll to bottom whenever messages or loading state changes
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, loading]); // Added dependency array
-
-  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages, loading]);
 
-  /* Add to Chat.tsx component */
   useEffect(() => {
-    // Initial scroll to top fix
     setTimeout(() => {
       const firstMessage = document.querySelector('.message');
       firstMessage?.scrollIntoView({ behavior: 'auto' });
@@ -58,74 +48,62 @@ export default function Chat() {
     setError(null);
     
     try {
-        // Add user message first
-        setMessages(prev => [...prev, { 
-            text: input, 
-            isUser: true, 
-            id: Date.now() 
-        }]);
+      setMessages(prev => [
+        ...prev, 
+        { text: input, isUser: true, id: Date.now() }
+      ]);
 
-        const response = await axios.post<{
-            response: string;
-            llm_raw: string;
-            llm_after_recontext: string;
-            anonymized_prompt: string;
-            mapping: AnonymizationMapping[];
-        }>(API_URL, { prompt: input });
+      const response = await axios.post<{
+        response: string;
+        llm_raw: string;
+        llm_after_recontext: string;
+        anonymized_prompt: string;
+        mapping: AnonymizationMapping[];
+      }>(API_URL, { prompt: input });
 
-        // Then add bot response
-        setMessages(prev => [...prev, {
-            text: response.data.response,
-            isUser: false,
-            id: Date.now() + 1,
-            details: {
-                anonymizedPrompt: response.data.anonymized_prompt,
-                raw: response.data.llm_raw,
-                final: response.data.response
-            }
-        }]);
-        
-    } catch (err) {
-        let errorMessage = 'Failed to send message';
-        if (axios.isAxiosError(err)) {
-          errorMessage = err.response?.data?.error || err.message;
+      setMessages(prev => [
+        ...prev, 
+        {
+          text: response.data.response,
+          isUser: false,
+          id: Date.now() + 1,
+          details: {
+            anonymizedPrompt: response.data.anonymized_prompt,
+            raw: response.data.llm_raw,
+            final: response.data.response
+          }
         }
-        setError(errorMessage);
-        console.error(err);
+      ]);
+    } catch (err) {
+      let errorMessage = 'Failed to send message';
+      if (axios.isAxiosError(err)) {
+        errorMessage = err.response?.data?.error || err.message;
+      }
+      setError(errorMessage);
+      console.error(err);
     } finally {
-        setLoading(false);
-        setInput('');
+      setLoading(false);
+      setInput('');
     }
-};
+  };
+
   return (
     <div className="chat-container">
-       <header className="crypto-header">
-        <div className="crypto-layout">
-          <div className="crypto-line-top">
-            Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0jpLx82?f<span className="shield">🛡️</span>S09kBMtLwNj7Dbc<span className="shield">🛡️</span>T&AV@0qte
-          </div>
-          
-          <div className="brand-core">
-            <h1 className="brand-title">Private-Prompt</h1>
-          </div>
-      
-          <div className="crypto-line-bottom">
-            JG5^hdBn0Tu%Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0M94pRnA<span className="lock">🔒</span>vzke?JKmb787rG$a~d<span className="key">🔑</span>#fHS9izQhUpi<span className="key">🔑</span>4T1GpRnxf
-          </div>
+      {/* Single header with logo/branding text */}
+      <header className="chat-header">
+        <div className="header-content">
+          <p className="logo-text">
+            Idee de Logo: Zyn0Q9🗝️kbMz!7rfS0Gv🗝️#K!nryn0QMz!7rGv#K^jpLx82?f🛡️S09kBMt4q$YpVhHxa%LwNj7Dbc🛡️T&AV@0qZ94ePrivate-Prompt.comJa~d#fHS9Lg0m4T1G🔒HxahUbkNj7DbcT&0qZ94pRnA🔒vzke?JG5^hdb787rG$a~d🔑#fHS9Lg0mzQpizQhUpi🔑4T1GpRnxf
+          </p>
         </div>
       </header>
+
       <div className="messages-container">
         {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`message ${msg.isUser ? 'user' : 'bot'}`}
-          >
+          <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
             {msg.text}
-            {msg.details && (
-              <ResponseDetails details={msg.details} />
-            )}
+            {msg.details && <ResponseDetails details={msg.details} />}
           </div>
-
         ))}
         {loading && (
           <div className="loading-indicator">
@@ -133,7 +111,6 @@ export default function Chat() {
             Generating response...
           </div>
         )}
-        {/* Empty div at bottom for scrolling reference */}
         <div ref={messagesEndRef} />
       </div>
 
@@ -167,12 +144,7 @@ export default function Chat() {
             disabled={loading}
             className="chat-input"
           />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="send-button"
-          >
+          <button type="submit" disabled={loading} className="send-button">
             <FiSend className="send-icon" />
             Send
           </button>
