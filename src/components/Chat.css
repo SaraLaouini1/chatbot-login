@@ -44,10 +44,7 @@
   animation: text-glow 2s ease-in-out infinite alternate;
 }
 
-.domain {
-  color: var(--gold-accent);
-  font-weight: 300;
-}
+
 
 .lock-icon {
   animation: lock-float 3s ease-in-out infinite;
@@ -61,6 +58,7 @@
   max-width: 90%;
   text-align: center;
   line-height: 1.2;
+  color: white
 }
 
 @keyframes text-glow {
