@@ -29,14 +29,27 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+  const inputContainerRef = useRef<HTMLDivElement>(null);
 
-  // Update CSS variable for header height
+
+  // Update the useEffect to measure both header and input container heights
   useEffect(() => {
-    if (headerRef.current) {
-      const headerHeight = headerRef.current.offsetHeight;
-      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-    }
-  }, [headerRef.current, /* optionally include header content changes */]);
+    const updateHeights = () => {
+      if (headerRef.current && inputContainerRef.current) {
+        const headerHeight = headerRef.current.offsetHeight;
+        const inputHeight = inputContainerRef.current.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+        document.documentElement.style.setProperty('--input-height', `${inputHeight}px`);
+      }
+    };
+
+    // Initial measurement
+    updateHeights();
+
+    // Update on window resize
+    window.addEventListener('resize', updateHeights);
+    return () => window.removeEventListener('resize', updateHeights);
+  }, [headerRef.current, inputContainerRef.current]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
