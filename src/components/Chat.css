@@ -329,7 +329,6 @@
 
 /* Modern Cryptographic Header */
 .crypto-header {
-  display: none !important;
   background: #1a1c25;
   padding: 1.5rem 1rem;
   border-bottom: 1px solid rgba(197, 164, 126, 0.1);
@@ -411,6 +410,7 @@
     box-sizing: border-box;
     background: #ffffff !important; /* Solid white */
     backdrop-filter: none !important;
+    box-shadow: none !important;
   }
 
   .chat-title {
