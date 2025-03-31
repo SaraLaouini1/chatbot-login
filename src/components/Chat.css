@@ -354,6 +354,8 @@
     /* Removing explicit height calc lets flexbox manage the space */
     margin-top: 0.5rem;
     background: #fff;
+    flex: 1;
+    overflow-y: auto;
   }
 
   /* Fixed Input Container */
@@ -381,6 +383,11 @@
     font-size: 0.8rem;
   }
 
+  .messages-container {
+    flex: 1;
+    overflow-y: auto;
+  }
+
   .message {
     padding: 0.7rem 1rem;
     font-size: 0.88rem;
@@ -397,6 +404,8 @@
     padding: 0.5rem;
     padding-bottom: 70px; /* Reserve space for input */
     /* You might need to adjust top padding if header wraps to two lines */
+    flex: 1;
+    overflow-y: auto;
   }
 
   .message {
@@ -428,6 +437,8 @@
   .messages-container {
     padding-top: 0.5rem;
     padding-bottom: 65px;
+    flex: 1;
+    overflow-y: auto;
   }
 
   .message {
@@ -461,6 +472,8 @@
   .messages-container {
     padding-top: 0.5rem;
     padding-bottom: 60px;
+    flex: 1;
+    overflow-y: auto;
   }
 
   .input-container {
