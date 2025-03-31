@@ -99,19 +99,10 @@ export default function Chat() {
 };
   return (
     <div className="chat-container">
-      <header className="crypto-header">
-        <div className="crypto-layout">
-          <div className="crypto-line-top">
-            Zyn0Q9<span className="symbol">🗝️</span>kbMz!7rfS0Gv<span className="symbol">🗝️</span>#K!nryn0jpLx82?f<span className="shield">🛡️</span>S09kBMtLwNj7Dbc<span className="shield">🛡️</span>T&AV@0qte
-          </div>
-          
-          <div className="brand-core">
-            <h1 className="brand-title">Private-Prompt</h1>
-          </div>
-      
-          <div className="crypto-line-bottom">
-            JG5^hdBn0Tu%Lg0m4T1G<span className="lock">🔒</span>HxahUbk+W0M94pRnA<span className="lock">🔒</span>vzke?JKmb787rG$a~d<span className="key">🔑</span>#fHS9izQhUpi<span className="key">🔑</span>4T1GpRnxf
-          </div>
+       <header className="chat-header">
+        <div className="title-container">
+          <h1 className="chat-title">Private Prompt</h1>
+          <span className="lock-logo animated-lock" aria-hidden="true">🔒</span>
         </div>
       </header>
       <div className="messages-container">
