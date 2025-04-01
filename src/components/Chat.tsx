@@ -46,10 +46,7 @@ export default function Chat() {
     "Format a contract amendment between Globex (legal@globex.com) and John Doe (john.doe@vendor.com) increasing payment to $15,000/month - highlight key changes"
   ];
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
-
+  
   useEffect(() => {
     setTimeout(() => {
       const firstMessage = document.querySelector('.message');
