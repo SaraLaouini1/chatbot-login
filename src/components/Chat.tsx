@@ -34,7 +34,7 @@ export default function Chat() {
   
   // Suggested prompts array
   const suggestedPrompts = [
-    "Draft an email confirmation for transaction 5500 0000 0000 0004 (Michael Chen, michael.chen@financetech.com) processing $2,500.00 on 2024-03-15 - keep under 3 paragraphs",
+    "Draft an email confirmation for transaction 5500 0000 0000 0004 (Michael Chen, michael.chen@financetech.com) processing $2,500.00 on 2024-03-15",
     "Generate a customer service response to Sarah O'Reilly (sarah.o@healthcare.org, 555-012-3456) about case #78945 in Toronto - format as bullet points",
     "Create an executive summary for Q2 sales: $1.8M revenue from Acme Corp (contact@acmecorp.com) with 15% growth - use markdown table format",
     "Compose an HR alert about unauthorized access from IP 203.0.113.42 on 2024-02-28T14:30 - include incident timeline and action steps",
