@@ -34,16 +34,16 @@ export default function Chat() {
   
   // Suggested prompts array
   const suggestedPrompts = [
-    "Process customer support ticket #45621 from Emily Johnson (ejohnson@acmeinc.com, 555-987-6543) regarding transaction 4111-1111-1111-1111 on October 15th 2023",
-    "Generate a contract for Michael Chen (michael.chen@globex.com) at 1600 Amphitheatre Parkway, Mountain View to receive $15,000.50 monthly payments starting 2024-01-01",
-    "Analyze network logs from 2023-12-24T08:45:00Z showing access from 192.168.1.15 to secureportal.internalcorp.com by user ID 123-45-6789",
-    "Create an invoice for TechSolutions Ltd (contact@techsolutions.co.uk) covering services from March 1st to March 31st 2024 totaling €20,000.00",
-    "Document HR case for Sarah O'Reilly (sarah.oreilly@example.org, +1-416-555-1234) regarding benefits enrollment in Toronto, ON",
-    "Process payment authorization from David Martínez (david.martinez@bancorp.es) for account 5500 0000 0000 0004 expiring 12/25 through payment.example-services.com",
-    "Format sales report for Q2 2024 showing $1.2M revenue from Acme Corp (sales@acmecorp.com) with key contact James Wilson (555) 123-4567",
-    "Analyze security incident from 2023-11-05 14:30 involving IP 203.0.113.42 accessing confidential docs at docs.corporatenet.com/user/789",
-    "Prepare employment contract for Dr. Alice Tanaka (alice.tanaka@researchlab.jp) with annual salary ¥12,500,000 starting April 1st 2024",
-    "Document customer complaint from Maria Silva (maria.silva@braskem.com.br, +55-11-98765-4321) regarding shipment #78945 delayed since 2023-12-15"
+    "Draft an email confirmation for transaction 5500 0000 0000 0004 (Michael Chen, michael.chen@financetech.com) processing $2,500.00 on 2024-03-15 - keep under 3 paragraphs",
+    "Generate a customer service response to Sarah O'Reilly (sarah.o@healthcare.org, 555-012-3456) about case #78945 in Toronto - format as bullet points",
+    "Create an executive summary for Q2 sales: $1.8M revenue from Acme Corp (contact@acmecorp.com) with 15% growth - use markdown table format",
+    "Compose an HR alert about unauthorized access from IP 203.0.113.42 on 2024-02-28T14:30 - include incident timeline and action steps",
+    "Format an invoice template for TechSolutions Ltd (invoice@techsolutions.co.uk) covering 03/01-03/31/2024 services totaling €25,000 - include payment terms",
+    "Prepare a shipping notification for Maria Silva (maria.silva@logistics.br, +55-11-98765-4321) regarding delayed shipment #78945 - include compensation offer",
+    "Generate a compliance report for transaction 4111-1111-1111-1111 (David Martínez, david.m@bancorp.es) processed through payment.example.com - use section headers",
+    "Create an employee onboarding checklist for Dr. Alice Tanaka (alice.tanaka@research.jp) starting 2024-04-01 - numbered list with deadlines",
+    "Draft a security alert about suspicious login from 192.168.1.15 to docs.corporate.net/user/789 on 2024-01-05 08:45 - include verification steps",
+    "Format a contract amendment between Globex (legal@globex.com) and John Doe (john.doe@vendor.com) increasing payment to $15,000/month - highlight key changes"
   ];
 
   useEffect(() => {
