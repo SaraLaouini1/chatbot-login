@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-/ Helper function that wraps placeholders (e.g. <placeholder>) in <strong> tags.
+// Helper function that wraps placeholders (e.g. <placeholder>) in <strong> tags.
 function renderBoldPlaceholders(text: string) {
   // This regex splits the string into parts that are placeholders and the rest of the text.
   const parts = text.split(/(<[^>]+>)/g);
