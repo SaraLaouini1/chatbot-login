@@ -34,10 +34,16 @@ export default function Chat() {
   
   // Suggested prompts array
   const suggestedPrompts = [
-    "Help me create a secure password for my email account.",
-    "Generate a strong encryption key for my sensitive files.",
-    "What's the best way to anonymize my online activity?",
-    "Suggest a privacy-focused workflow for document sharing."
+    "Process customer support ticket #45621 from Emily Johnson (ejohnson@acmeinc.com, 555-987-6543) regarding transaction 4111-1111-1111-1111 on October 15th 2023",
+    "Generate a contract for Michael Chen (michael.chen@globex.com) at 1600 Amphitheatre Parkway, Mountain View to receive $15,000.50 monthly payments starting 2024-01-01",
+    "Analyze network logs from 2023-12-24T08:45:00Z showing access from 192.168.1.15 to secureportal.internalcorp.com by user ID 123-45-6789",
+    "Create an invoice for TechSolutions Ltd (contact@techsolutions.co.uk) covering services from March 1st to March 31st 2024 totaling €20,000.00",
+    "Document HR case for Sarah O'Reilly (sarah.oreilly@example.org, +1-416-555-1234) regarding benefits enrollment in Toronto, ON",
+    "Process payment authorization from David Martínez (david.martinez@bancorp.es) for account 5500 0000 0000 0004 expiring 12/25 through payment.example-services.com",
+    "Format sales report for Q2 2024 showing $1.2M revenue from Acme Corp (sales@acmecorp.com) with key contact James Wilson (555) 123-4567",
+    "Analyze security incident from 2023-11-05 14:30 involving IP 203.0.113.42 accessing confidential docs at docs.corporatenet.com/user/789",
+    "Prepare employment contract for Dr. Alice Tanaka (alice.tanaka@researchlab.jp) with annual salary ¥12,500,000 starting April 1st 2024",
+    "Document customer complaint from Maria Silva (maria.silva@braskem.com.br, +55-11-98765-4321) regarding shipment #78945 delayed since 2023-12-15"
   ];
 
   useEffect(() => {
