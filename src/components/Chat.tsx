@@ -29,6 +29,17 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
+  // Add input ref
+  const inputRef = useRef<HTMLInputElement>(null);
+  
+  // Suggested prompts array
+  const suggestedPrompts = [
+    "Help me create a secure password for my email account.",
+    "Generate a strong encryption key for my sensitive files.",
+    "What's the best way to anonymize my online activity?",
+    "Suggest a privacy-focused workflow for document sharing."
+  ];
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
@@ -110,6 +121,28 @@ export default function Chat() {
       </header>
 
       <div className="messages-container">
+
+        {messages.length === 0 && !loading && (
+          <div className="suggestions-container">
+            <h3>Try one of these prompts or write your own:</h3>
+            <div className="suggestions-list">
+              {suggestedPrompts.map((prompt, index) => (
+                <button
+                  key={index}
+                  className="suggestion-button"
+                  onClick={() => {
+                    setInput(prompt);
+                    inputRef.current?.focus();
+                  }}
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        
         {messages.map((msg) => (
           <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
             {msg.text}
@@ -148,6 +181,7 @@ export default function Chat() {
       <div className="input-container">
         <form onSubmit={handleSubmit} className="input-wrapper">
           <input
+            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
