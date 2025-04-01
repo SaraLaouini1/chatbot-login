@@ -1,3 +1,62 @@
+/* Prompt Suggestions */
+.suggestions-container {
+  padding: 2rem 1rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.suggestions-container h3 {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.suggestion-button {
+  background: white;
+  border: 1px solid rgba(42, 45, 59, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.suggestion-button:hover {
+  border-color: var(--gold-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 164, 126, 0.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .suggestions-container {
+    padding: 1rem;
+  }
+
+  .suggestion-button {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+}
+
 /* Enhanced Header Styles */
 .chat-header {
   background: #0a0a0f;
