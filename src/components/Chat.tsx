@@ -32,7 +32,7 @@ export default function Chat() {
   // Suggested prompts array
   const suggestedPrompts = [
     "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith, his email:john.smith@bankco.com used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo, JP for a $2,500 charge.",
-    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://patientportal.healthcare and provide the pharmacy phone number (555) 123-4567.",
+    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
     "Create a shipping delay notification for Raj Patel, his email: raj.p@mail.in and his phone number: +91-98765-43210 indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
     "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 08:15 for user Alice Chen, her email: alice.chen@company.net.",
     "Format a PCI compliance report for a transaction using card 5500 0000 0000 0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
