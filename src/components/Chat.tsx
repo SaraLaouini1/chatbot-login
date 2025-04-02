@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
@@ -26,12 +25,9 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
-  // Add input ref
-  const inputRef = useRef<HTMLInputElement>(null);
-  
   // Suggested prompts array
   const suggestedPrompts = [
     "Draft an email confirmation for transaction 5500 0000 0000 0004 (Michael Chen, michael.chen@financetech.com) processing $2,500.00 on 2024-03-15",
@@ -46,13 +42,11 @@ export default function Chat() {
     "Format a contract amendment between Globex (legal@globex.com) and John Doe (john.doe@vendor.com) increasing payment to $15,000/month - highlight key changes"
   ];
 
-  
+  // Updated scroll behavior: scroll to the new message so that its top is aligned with the top of the container
   useEffect(() => {
-    setTimeout(() => {
-      const firstMessage = document.querySelector('.message');
-      firstMessage?.scrollIntoView({ behavior: 'auto' });
-    }, 100);
-  }, []);
+    const newMessage = document.querySelector('.message:last-child');
+    newMessage?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [messages, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,7 +139,6 @@ export default function Chat() {
           </div>
         )}
 
-        
         {messages.map((msg) => (
           <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
             {msg.text}
@@ -158,7 +151,6 @@ export default function Chat() {
             Generating response...
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {error && (
