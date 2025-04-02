@@ -31,16 +31,13 @@ export default function Chat() {
 
   // Suggested prompts array
   const suggestedPrompts = [
-    "Draft an email confirmation for transaction 5500-0000-0000-0004 (Michael Chen, michael.chen@financetech.com) processing $2,500.00 on 2024-03-15",
-    "Generate a customer service response to Sarah O'Reilly (sarah.o@healthcare.org, 555-012-3456) about case #78945 in Toronto",
-    "Create an executive summary for Q2 sales: $1800000 revenue from Acme Corp (contact@acmecorp.com) with 15% growth",
-    "Compose an HR alert about unauthorized access from IP 203.0.113.42 on 2024-02-28 at 14:30",
-    "Prepare a shipping notification for Maria Silva (maria.silva@logistics.br, +55-11-98765-4321) regarding delayed shipment #78945",
-    "Generate a compliance report for transaction 4111-1111-1111-1111 (David Martínez, david.m@bancorp.es) processed through payment.example.com",
-    "Create an employee onboarding checklist for Dr. Alice Tanaka (alice.tanaka@research.jp) starting 2024-04-01 - numbered list with deadlines",
-    "Draft a security alert about suspicious login from 192.168.1.15 to docs.corporate.net/user/789 on 2024-01-05 08:45",
-    "Format a contract amendment between Globex (legal@globex.com) and John Doe (john.doe@vendor.com) increasing payment to $15,000/month"
+    "Draft an email confirmation for transaction 5500-0000-0000-0004 for Michael Chen, an American, confirming a $2,500.00 payment processed on 2024-03-15.",
+    "Generate a customer service response to Sarah O'Reilly (sarah.o@healthcare.org, 555-012-3456), a devout Catholic, regarding case #78945 in Toronto.",
+    "Create an executive summary for Q2 sales with a revenue of $1,800,000 from Acme Corp (contact@acmecorp.com), led by John Doe, an Indian executive, highlighting a 15% growth rate.",
+    "Compose an HR alert about unauthorized access detected on 2024-02-28 at 14:30, involving David Martínez (david.m@bancorp.es) based in Spain, with activity originating from IP 203.0.113.42.",
+    "Prepare a shipping notification for Maria Silva (maria.silva@logistics.br, +55-11-98765-4321) regarding a delayed shipment, noting her Brazilian heritage, and scheduled for delivery on 2024-04-10."
   ];
+
 
   useEffect(() => {
     setTimeout(() => {
