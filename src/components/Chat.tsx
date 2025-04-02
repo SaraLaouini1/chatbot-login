@@ -31,16 +31,14 @@ export default function Chat() {
 
   // Suggested prompts array
   const suggestedPrompts = [
-    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith (john.smith@bankco.com) used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo, JP for a $2,500 charge. List investigation steps as bullet points.",
-    "Generate a patient discharge summary for Maria González (123-45-6789) treated on 03/25/2024. Include follow-up instructions directing the patient to https://patientportal.healthcare and provide the pharmacy phone number (555) 123-4567.",
-    "Prepare a contract amendment between Globex (legal@globex.com) and Sarah Johnson (sarahj@vendor.io) to increase the monthly payment to €15,000 until 2025-12-31. Highlight all changes in red text.",
-    "Create a shipping delay notification for Raj Patel (raj.p@mail.in, +91-98765-43210) indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05, and use a numbered list for details.",
-    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 08:15 for user Alice Chen (alice.chen@company.net). Include verification steps.",
-    "Format a PCI compliance report for a transaction using card 5500 0000 0000 0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99. Present the report in a table with status columns.",
-    "Create an onboarding checklist for new hire Dr. Emily Wong (emily.wong@research.hk, ID-4567) starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
-    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 09:00 to 11:00. Mention a $50 credit compensation and list details using bullet points.",
-    "Prepare an executive summary for Q3 sales highlighting $2.5M revenue from GlobalCorp's Munich office (client@globalcorp.de). Include a markdown table comparing growth percentages between 2023-09-30 and 2024-09-30.",
-    "Generate a customer survey request for James O'Neill (james.oneill@mail.co.uk, +44 7911 123456) offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31."
+    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith, his email:john.smith@bankco.com used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo, JP for a $2,500 charge.",
+    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://patientportal.healthcare and provide the pharmacy phone number (555) 123-4567.",
+    "Create a shipping delay notification for Raj Patel, his email: raj.p@mail.in and his phone number: +91-98765-43210 indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
+    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 08:15 for user Alice Chen, her email: alice.chen@company.net.",
+    "Format a PCI compliance report for a transaction using card 5500 0000 0000 0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
+    "Create an onboarding checklist for new hire Dr. Emily Wong, her email: emily.wong@research.hk starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
+    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 09:00 to 11:00. Mention a $50 credit compensation",
+    "Generate a customer survey request for James O'Neill, his email: james.oneill@mail.co.uk and his phone number: +44 7911 123456 offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31."
   ];
 
 
