@@ -26,7 +26,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Add this line
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
   // Suggested prompts array
@@ -50,23 +50,18 @@ export default function Chat() {
     }, 100);
   }, []);
 
- 
-
-
-  // Update the useEffect for scrolling
+  // Scroll handling useEffect
   useEffect(() => {
     if (messages.length === 0) return;
-  
+
     const lastMessage = messages[messages.length - 1];
     if (!lastMessage.isUser) {
-      // Scroll to top of the last bot message
       const messageElements = document.querySelectorAll('.message');
       if (messageElements.length > 0) {
         const lastBotMessage = messageElements[messageElements.length - 1];
         lastBotMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
-      // Scroll to bottom for user messages
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, loading]);
@@ -119,7 +114,6 @@ export default function Chat() {
 
   return (
     <div className="chat-container">
-      {/* Single header with logo/branding text */}
       <header className="chat-header">
         <div className="header-content">
           <div className="cyber-border"></div>
@@ -141,7 +135,6 @@ export default function Chat() {
       </header>
 
       <div className="messages-container">
-
         {messages.length === 0 && !loading && (
           <div className="suggestions-container">
             <h3>Try one of these prompts or write your own:</h3>
@@ -160,7 +153,6 @@ export default function Chat() {
               ))}
             </div>
           </div>
-        <div ref={messagesEndRef} />
         )}
 
         {messages.map((msg) => (
@@ -169,12 +161,16 @@ export default function Chat() {
             {msg.details && <ResponseDetails details={msg.details} />}
           </div>
         ))}
+
         {loading && (
           <div className="loading-indicator">
             <div className="spinner"></div>
             Generating response...
           </div>
         )}
+
+        {/* Scroll anchor placed at the bottom of messages container */}
+        <div ref={messagesEndRef} />
       </div>
 
       {error && (
