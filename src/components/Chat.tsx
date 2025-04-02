@@ -26,6 +26,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null); // Add this line
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
   // Suggested prompts array
@@ -49,9 +50,7 @@ export default function Chat() {
     }, 100);
   }, []);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+ 
 
 
   // Update the useEffect for scrolling
@@ -161,6 +160,7 @@ export default function Chat() {
               ))}
             </div>
           </div>
+        <div ref={messagesEndRef} />
         )}
 
         {messages.map((msg) => (
