@@ -42,10 +42,30 @@ export default function Chat() {
     "Format a contract amendment between Globex (legal@globex.com) and John Doe (john.doe@vendor.com) increasing payment to $15,000/month - highlight key changes"
   ];
 
-  // Updated scroll behavior: scroll to the new message so that its top is aligned with the top of the container
   useEffect(() => {
-    const newMessage = document.querySelector('.message:last-child');
-    newMessage?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => {
+      const firstMessage = document.querySelector('.message');
+      firstMessage?.scrollIntoView({ behavior: 'auto' });
+    }, 100);
+  }, []);
+
+
+  // Update the useEffect for scrolling
+  useEffect(() => {
+    if (messages.length === 0) return;
+  
+    const lastMessage = messages[messages.length - 1];
+    if (!lastMessage.isUser) {
+      // Scroll to top of the last bot message
+      const messageElements = document.querySelectorAll('.message');
+      if (messageElements.length > 0) {
+        const lastBotMessage = messageElements[messageElements.length - 1];
+        lastBotMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // Scroll to bottom for user messages
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
