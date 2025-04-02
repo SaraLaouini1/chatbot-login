@@ -49,6 +49,10 @@ export default function Chat() {
     }, 100);
   }, []);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
 
   // Update the useEffect for scrolling
   useEffect(() => {
