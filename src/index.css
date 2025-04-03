@@ -1,13 +1,4 @@
 /* index.css */
-.intro-banner {
-  background: #f0f4f8;
-  color: #2A2D3B;
-  padding: 1rem;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
 
 :root {
   --primary-color: #2A2D3B;
