@@ -44,6 +44,16 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     navigate('/login');  // Use React Router navigation
   };
 
+
+  const token = localStorage.getItem('authToken');
+  const response = await axios.post("https://chatbot-backend-dikk.onrender.com/process", 
+    { prompt: input },
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );
+
+
   // Suggested prompts array
   const suggestedPrompts = [
     "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
