@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
+import { useNavigate } from 'react-router-dom';
+
 
 interface Message {
   text: string;
@@ -30,9 +32,11 @@ export default function Chat() {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    window.location.href = '/login';
+    navigate('/login');  // Use React Router navigation
   };
 
   // Suggested prompts array
