@@ -147,10 +147,24 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
             </span>
           </div>
           <div className="cyber-border"></div>
+
+          <div className="header-right">
+            <div className="user-indicator">
+              <span className="user-icon">👤</span>
+              <span>Demo User</span>
+            </div>
+            <button 
+              onClick={handleLogout} 
+              className="logout-button"
+              aria-label="Logout"
+            >
+              <span className="logout-text">Logout</span>
+              <span className="logout-icon">🚪</span>
+            </button>
+          </div>
+
+          
         </div>
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
       </header>
 
       <div className="messages-container">
