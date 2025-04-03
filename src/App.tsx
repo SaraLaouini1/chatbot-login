@@ -1,7 +1,9 @@
+// src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Chat from './components/Chat';
 import Login from './components/Login';
+import Register from './components/Register';
 import './App.css';
 
 function App() {
@@ -17,6 +19,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route 
+          path="/register" 
+          element={
+            isAuthenticated ? (
+              <Navigate to="/" replace />
+            ) : (
+              <Register setIsAuthenticated={setIsAuthenticated} />
+            )
+          } 
+        />
         <Route 
           path="/login" 
           element={
