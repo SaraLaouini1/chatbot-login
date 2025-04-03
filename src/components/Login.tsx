@@ -6,19 +6,7 @@ interface LoginProps {
   setIsAuthenticated: (value: boolean) => void;
 }
 
-// Mock database of authorized users
-const VALID_USERS = [
-  {
-    username: 'admin',
-    password: 'SecurePass123!',
-    role: 'administrator'
-  },
-  {
-    username: 'guest',
-    password: 'SafePassword456@',
-    role: 'guest'
-  }
-];
+
 
 export default function Login({ setIsAuthenticated }: LoginProps) {
   const [username, setUsername] = useState('');
