@@ -26,29 +26,22 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // In Login.tsx replace handleSubmit with:
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Find user with matching credentials
-    const authenticatedUser = VALID_USERS.find(user => 
-      user.username === username && 
-      user.password === password
-    );
-
-    if (authenticatedUser) {
-      // Create session token with expiration (1 hour)
-      const sessionToken = JSON.stringify({
-        username: authenticatedUser.username,
-        role: authenticatedUser.role,
-        expires: Date.now() + 3600000 // 1 hour in milliseconds
+    try {
+      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/login", {
+        username,
+        password
       });
-      
-      localStorage.setItem('authToken', sessionToken);
-      setIsAuthenticated(true);
-      navigate('/');
-    } else {
+      const token = response.data.access_token;
+      if (token) {
+        localStorage.setItem('authToken', token);
+        setIsAuthenticated(true);
+        navigate('/');
+      }
+    } catch (err) {
       setError('Invalid credentials');
-      // Security: Clear fields on failed attempt
       setUsername('');
       setPassword('');
     }
