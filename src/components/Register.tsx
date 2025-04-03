@@ -28,9 +28,11 @@ export default function Register({ setIsAuthenticated }: RegisterProps) {
         navigate('/');
       }
     } catch (err) {
-      setError('Registration failed. Username might already exist.');
-      setUsername('');
-      setPassword('');
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || 'Registration failed');
+      } else {
+        setError('Registration failed');
+      }
     }
   };
 
