@@ -29,6 +29,12 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
+
   // Suggested prompts array
   const suggestedPrompts = [
     "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
@@ -133,6 +139,9 @@ export default function Chat() {
           </div>
           <div className="cyber-border"></div>
         </div>
+        <button onClick={handleLogout} className="logout-button">
+          Logout
+        </button>
       </header>
 
       <div className="messages-container">
