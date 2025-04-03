@@ -17,7 +17,7 @@ export default function Register({ setIsAuthenticated }: RegisterProps) {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/register", {
+      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/api/register", {
         username,
         password
       });
