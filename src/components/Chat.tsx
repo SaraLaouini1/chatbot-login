@@ -149,10 +149,6 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
           <div className="cyber-border"></div>
 
           <div className="header-right">
-            <div className="user-indicator">
-              <span className="user-icon">👤</span>
-              <span>Demo User</span>
-            </div>
             <button 
               onClick={handleLogout} 
               className="logout-button"
