@@ -47,7 +47,7 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
       setIsAuthenticated(true);
       navigate('/');
     } else {
-      setError('Invalid credentials - Please check username/password');
+      setError('Invalid credentials');
       // Security: Clear fields on failed attempt
       setUsername('');
       setPassword('');
@@ -87,12 +87,6 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
           </button>
         </form>
         
-        {/* Security disclaimer */}
-        <div className="security-note">
-          <small>
-            🔐 All access attempts are logged. Unauthorized use prohibited.
-          </small>
-        </div>
       </div>
     </div>
   );
