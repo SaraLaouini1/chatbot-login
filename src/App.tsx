@@ -9,10 +9,14 @@ import './App.css';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // In App.tsx useEffect:
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
+      // Add proper JWT validation check here
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, []);
 
