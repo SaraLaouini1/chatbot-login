@@ -1,13 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Login.css';
 
 interface LoginProps {
   setIsAuthenticated: (value: boolean) => void;
 }
 
-
+// Mock database of authorized users
+const VALID_USERS = [
+  {
+    username: 'admin',
+    password: 'SecurePass123!',
+    role: 'administrator'
+  },
+  {
+    username: 'guest',
+    password: 'SafePassword456@',
+    role: 'guest'
+  }
+];
 
 export default function Login({ setIsAuthenticated }: LoginProps) {
   const [username, setUsername] = useState('');
@@ -15,22 +26,29 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // In Login.tsx replace handleSubmit with:
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/api/login", {
-        username,
-        password
+    
+    // Find user with matching credentials
+    const authenticatedUser = VALID_USERS.find(user => 
+      user.username === username && 
+      user.password === password
+    );
+
+    if (authenticatedUser) {
+      // Create session token with expiration (1 hour)
+      const sessionToken = JSON.stringify({
+        username: authenticatedUser.username,
+        role: authenticatedUser.role,
+        expires: Date.now() + 3600000 // 1 hour in milliseconds
       });
-      const token = response.data.access_token;
-      if (token) {
-        localStorage.setItem('authToken', token);
-        setIsAuthenticated(true);
-        navigate('/');
-      }
-    } catch (err) {
+      
+      localStorage.setItem('authToken', sessionToken);
+      setIsAuthenticated(true);
+      navigate('/');
+    } else {
       setError('Invalid credentials');
+      // Security: Clear fields on failed attempt
       setUsername('');
       setPassword('');
     }
