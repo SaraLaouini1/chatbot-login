@@ -31,7 +31,7 @@ function App() {
           path="/" 
           element={
             isAuthenticated ? (
-              <Chat />
+              <Chat setIsAuthenticated={setIsAuthenticated} />
             ) : (
               <Navigate to="/login" replace />
             )
