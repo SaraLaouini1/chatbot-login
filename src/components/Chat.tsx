@@ -1,10 +1,10 @@
-// src/components/Chat.tsx
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
 import './Chat.css';
 import ResponseDetails from './ResponseDetails';
 import { useNavigate } from 'react-router-dom';
+
 
 interface Message {
   text: string;
@@ -33,14 +33,31 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const API_URL = import.meta.env.VITE_API_URL || 'https://chatbot-backend-dikk.onrender.com/api/process';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     setIsAuthenticated(false);
-    navigate('/login');
+    navigate('/login');  // Use React Router navigation
   };
+
+  // Suggested prompts array
+  const suggestedPrompts = [
+    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
+    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
+    "Create a shipping delay notification for Raj Patel indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
+    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 at 08:15 for user Alice Chen",
+    "Format a PCI compliance report for a transaction using card 5500-0000-0000-0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
+    "Create an onboarding checklist for new hire Dr. Emily Wong starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
+    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 at 09:00 to 11:00. Mention a $50 credit compensation",
+    "Generate a customer survey request for James O'Neill offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31.",
+    "Create a message informing Jack that I've changed my email to emily@gmail.com."
+  ];
+
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -68,45 +85,33 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
-
+    
     setLoading(true);
     setError(null);
-
+    
     try {
-      // Add user message immediately
       setMessages(prev => [
         ...prev, 
         { text: input, isUser: true, id: Date.now() }
       ]);
 
-      // Get JWT token if available
-      const token = localStorage.getItem('authToken');
-      
-      // Make the API request with the token in the header
-      const { data } = await axios.post<{
+      const response = await axios.post<{
         response: string;
         llm_raw: string;
         llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(
-        API_URL, 
-        { prompt: input },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
+      }>(API_URL, { prompt: input });
 
-      // Add bot response message to state
       setMessages(prev => [
         ...prev, 
         {
-          text: data.response,
+          text: response.data.response,
           isUser: false,
           id: Date.now() + 1,
           details: {
-            anonymizedPrompt: data.anonymized_prompt,
-            raw: data.llm_raw,
+            anonymizedPrompt: response.data.anonymized_prompt,
+            raw: response.data.llm_raw,
           }
         }
       ]);
@@ -142,6 +147,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
             </span>
           </div>
           <div className="cyber-border"></div>
+
           <div className="header-right">
             <button 
               onClick={handleLogout} 
@@ -152,6 +158,8 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
               <span className="logout-icon">🚪</span>
             </button>
           </div>
+
+          
         </div>
       </header>
 
@@ -163,17 +171,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
             </div>
             <h3>Try one of these prompts or write your own:</h3>
             <div className="suggestions-list">
-              {[
-                "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
-                "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
-                "Create a shipping delay notification for Raj Patel indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
-                "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 at 08:15 for user Alice Chen",
-                "Format a PCI compliance report for a transaction using card 5500-0000-0000-0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
-                "Create an onboarding checklist for new hire Dr. Emily Wong starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
-                "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 at 09:00 to 11:00. Mention a $50 credit compensation",
-                "Generate a customer survey request for James O'Neill offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31.",
-                "Create a message informing Jack that I've changed my email to emily@gmail.com."
-              ].map((prompt, index) => (
+              {suggestedPrompts.map((prompt, index) => (
                 <button
                   key={index}
                   className="suggestion-button"
