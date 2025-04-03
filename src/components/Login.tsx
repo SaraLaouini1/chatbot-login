@@ -19,7 +19,7 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/login", {
+      const response = await axios.post("https://chatbot-backend-dikk.onrender.com/api/login", {
         username,
         password
       });
