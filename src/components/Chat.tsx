@@ -22,7 +22,11 @@ interface AnonymizationMapping {
   anonymized: string;
 }
 
-export default function Chat() {
+interface ChatProps {
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+export default function Chat({ setIsAuthenticated }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,6 +40,7 @@ export default function Chat() {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
     navigate('/login');  // Use React Router navigation
   };
 
