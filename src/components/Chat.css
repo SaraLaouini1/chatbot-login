@@ -1,3 +1,26 @@
+/* Introductory text styling */
+.intro-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin: 1.5rem 0 2rem 0;
+  padding: 0 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 1rem;
+    margin: 1rem 0 1.5rem 0;
+    padding: 0 0.5rem;
+  }
+}
+
+
 /* Prompt Suggestions */
 .suggestions-container {
   padding: 2rem 1rem;
