@@ -382,10 +382,16 @@
 }
 
 /* Response Details Styles */
-.response-details {
+/*.response-details {
   margin-top: 1rem;
   border-top: 1px solid rgba(42, 45, 59, 0.1);
   padding-top: 1rem;
+}*/
+
+.response-details {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(42, 45, 59, 0.05);
+  padding-bottom: 1rem;
 }
 
 .toggle-details {
