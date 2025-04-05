@@ -189,8 +189,9 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
         {messages.map((msg) => (
           <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
-            {msg.text}
             {msg.details && <ResponseDetails details={msg.details} />}
+            {msg.text}
+            
           </div>
         ))}
 
