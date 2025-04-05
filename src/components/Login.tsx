@@ -83,7 +83,7 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
           </div>
           {error && <div className="error-message">{error}</div>}
           <button type="submit" className="login-button">
-            Authenticate
+            Sign in
           </button>
         </form>
         
