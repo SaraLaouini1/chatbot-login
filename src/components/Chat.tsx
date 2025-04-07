@@ -143,6 +143,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
         response: string;
         llm_raw: string;
         anonymized_prompt: string;
+        mapping: AnonymizationMapping[];
       }>(
         API_URL + '/process',
         {
