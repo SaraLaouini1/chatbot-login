@@ -54,14 +54,21 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     navigate('/login');
   };
 
+  // Update the useEffect for loading history
   useEffect(() => {
     const loadHistory = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
-        if (!authToken) return;
+        if (!authToken) {
+          handleLogout();
+          return;
+        }
         
-        const response = await axios.post(API_URL + '/history', {}, {
-          headers: { 'Authorization': `Bearer ${authToken}` }
+        const response = await axios.get(API_URL + '/history', {
+          headers: { 
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
+          }
         });
         
         setMessages(response.data.history.map((msg: any) => ({
@@ -72,10 +79,15 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
         })));
       } catch (err) {
         console.error('Error loading history:', err);
+        if (axios.isAxiosError(err) && err.response?.status === 401) {
+          handleLogout();
+        }
       }
     };
-
-    loadHistory();
+  
+    if (localStorage.getItem('authToken')) {
+      loadHistory();
+    }
   }, [API_URL]);
 
   // ... rest of the component remains the same until the return statement ...
@@ -110,79 +122,80 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     setLoading(true);
     setError(null);
     
-    const newUserMessageId = Date.now();
     const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      handleLogout();
+      return;
+    }
   
+    const newUserMessageId = Date.now();
+    
     try {
       // Add optimistic user message
-      setMessages(prev => [
-        ...prev, 
-        { 
-          text: input, 
-          isUser: true, 
-          id: newUserMessageId,
-          details: {} 
-        }
-      ]);
+      setMessages(prev => [...prev, { 
+        text: input, 
+        isUser: true, 
+        id: newUserMessageId,
+        details: {} 
+      }]);
   
       const response = await axios.post<{
         response: string;
         llm_raw: string;
-        llm_after_recontext: string;
         anonymized_prompt: string;
-        mapping: AnonymizationMapping[];
-      }>(API_URL + '/process', { 
-        prompt: input,
-        history: messages.map(msg => ({
-          isUser: msg.isUser,
-          text: msg.isUser ? msg.details?.anonymizedPrompt : msg.details?.raw
-        }))
-      }, {
-        headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
-      });
-  
-      // Update user message with anonymized data
-      setMessages(prev => prev.map(msg => {
-        if (msg.id === newUserMessageId) {
-          return {
-            ...msg,
-            details: {
-              ...msg.details,
-              anonymizedPrompt: response.data.anonymized_prompt
-            }
-          };
-        }
-        return msg;
-      }));
-  
-      // Add bot response
-      setMessages(prev => [
-        ...prev,
+      }>(
+        API_URL + '/process',
         {
-          text: response.data.response,
-          isUser: false,
-          id: Date.now() + 1,
-          details: {
-            raw: response.data.llm_raw,
-            anonymizedPrompt: response.data.anonymized_prompt
+          prompt: input,
+          history: messages.map(msg => ({
+            isUser: msg.isUser,
+            text: msg.isUser 
+              ? msg.details?.anonymizedPrompt 
+              : msg.details?.raw
+          }))
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
           }
         }
-      ]);
+      );
+  
+      // Update messages with actual server response
+      setMessages(prev => prev.map(msg => 
+        msg.id === newUserMessageId
+          ? {
+              ...msg,
+              details: {
+                ...msg.details,
+                anonymizedPrompt: response.data.anonymized_prompt
+              }
+            }
+          : msg
+      ).concat({
+        text: response.data.response,
+        isUser: false,
+        id: Date.now(),
+        details: {
+          raw: response.data.llm_raw,
+          anonymizedPrompt: response.data.anonymized_prompt
+        }
+      }));
+      
     } catch (err) {
       let errorMessage = 'Failed to send message';
       if (axios.isAxiosError(err)) {
         errorMessage = err.response?.data?.error || err.message;
+        if (err.response?.status === 401) handleLogout();
       }
       setError(errorMessage);
-      console.error(err);
     } finally {
       setLoading(false);
       setInput('');
     }
   };
-
+  
   return (
     <div className="chat-container">
       <header className="chat-header">
