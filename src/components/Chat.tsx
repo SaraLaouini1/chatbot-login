@@ -110,29 +110,63 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     setLoading(true);
     setError(null);
     
+    const newUserMessageId = Date.now();
+    const authToken = localStorage.getItem('authToken');
+  
     try {
+      // Add optimistic user message
       setMessages(prev => [
         ...prev, 
-        { text: input, isUser: true, id: Date.now() }
+        { 
+          text: input, 
+          isUser: true, 
+          id: newUserMessageId,
+          details: {} 
+        }
       ]);
-
+  
       const response = await axios.post<{
         response: string;
         llm_raw: string;
         llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(API_URL, { prompt: input });
-
+      }>(API_URL, { 
+        prompt: input,
+        history: messages.map(msg => ({
+          isUser: msg.isUser,
+          text: msg.isUser ? msg.details?.anonymizedPrompt : msg.details?.raw
+        }))
+      }, {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      });
+  
+      // Update user message with anonymized data
+      setMessages(prev => prev.map(msg => {
+        if (msg.id === newUserMessageId) {
+          return {
+            ...msg,
+            details: {
+              ...msg.details,
+              anonymizedPrompt: response.data.anonymized_prompt
+            }
+          };
+        }
+        return msg;
+      }));
+  
+      // Add bot response
       setMessages(prev => [
-        ...prev, 
+        ...prev,
         {
           text: response.data.response,
           isUser: false,
           id: Date.now() + 1,
           details: {
-            anonymizedPrompt: response.data.anonymized_prompt,
             raw: response.data.llm_raw,
+            anonymizedPrompt: response.data.anonymized_prompt
           }
         }
       ]);
