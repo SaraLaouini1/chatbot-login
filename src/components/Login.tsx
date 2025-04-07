@@ -40,8 +40,7 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
       const sessionToken = JSON.stringify({
         username: authenticatedUser.username,
         role: authenticatedUser.role,
-        expires: Date.now() + 3600000,
-        random: Math.random().toString(36).substr(2, 9)  // Add entropy
+        expires: Date.now() + 3600000 // 1 hour in milliseconds
       });
       
       localStorage.setItem('authToken', sessionToken);
