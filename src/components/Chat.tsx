@@ -1,4 +1,3 @@
-// src/components/Chat.tsx
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
@@ -34,8 +33,26 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
-
   const navigate = useNavigate();
+
+  // Suggested prompts array
+  const suggestedPrompts = [
+    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
+    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
+    "Create a shipping delay notification for Raj Patel indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
+    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 at 08:15 for user Alice Chen",
+    "Format a PCI compliance report for a transaction using card 5500-0000-0000-0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
+    "Create an onboarding checklist for new hire Dr. Emily Wong starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
+    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 at 09:00 to 11:00. Mention a $50 credit compensation",
+    "Generate a customer survey request for James O'Neill offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31.",
+    "Create a message informing Jack that I've changed my email to emily@gmail.com."
+  ];
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+    navigate('/login');
+  };
 
   useEffect(() => {
     const loadHistory = async () => {
@@ -59,7 +76,32 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     };
 
     loadHistory();
+  }, [API_URL]);
+
+  // ... rest of the component remains the same until the return statement ...
+
+  useEffect(() => {
+    setTimeout(() => {
+      const firstMessage = document.querySelector('.message');
+      firstMessage?.scrollIntoView({ behavior: 'auto' });
+    }, 100);
   }, []);
+
+  // Scroll handling useEffect
+  useEffect(() => {
+    if (messages.length === 0) return;
+
+    const lastMessage = messages[messages.length - 1];
+    if (!lastMessage.isUser) {
+      const messageElements = document.querySelectorAll('.message');
+      if (messageElements.length > 0) {
+        const lastBotMessage = messageElements[messageElements.length - 1];
+        lastBotMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,61 +110,29 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     setLoading(true);
     setError(null);
     
-    const newUserMessageId = Date.now();
-    
-    // Add optimistic user message
-    setMessages(prev => [
-      ...prev, 
-      { 
-        text: input, 
-        isUser: true, 
-        id: newUserMessageId,
-        details: {} 
-      }
-    ]);
-
     try {
-      const authToken = localStorage.getItem('authToken');
+      setMessages(prev => [
+        ...prev, 
+        { text: input, isUser: true, id: Date.now() }
+      ]);
+
       const response = await axios.post<{
         response: string;
         llm_raw: string;
         llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(API_URL, { 
-        prompt: input,
-        history: messages.map(msg => ({
-          isUser: msg.isUser,
-          text: msg.isUser ? msg.details?.anonymizedPrompt : msg.details?.raw
-        }))
-      }, {
-        headers: { 'Authorization': `Bearer ${authToken}` }
-      });
+      }>(API_URL, { prompt: input });
 
-      // Update user message with anonymized data
-      setMessages(prev => prev.map(msg => {
-        if (msg.id === newUserMessageId) {
-          return {
-            ...msg,
-            details: {
-              ...msg.details,
-              anonymizedPrompt: response.data.anonymized_prompt
-            }
-          };
-        }
-        return msg;
-      }));
-
-      // Add bot response
       setMessages(prev => [
-        ...prev,
+        ...prev, 
         {
           text: response.data.response,
           isUser: false,
           id: Date.now() + 1,
           details: {
+            anonymizedPrompt: response.data.anonymized_prompt,
             raw: response.data.llm_raw,
-            anonymizedPrompt: response.data.anonymized_prompt
           }
         }
       ]);
@@ -139,7 +149,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     }
   };
 
-   return (
+  return (
     <div className="chat-container">
       <header className="chat-header">
         <div className="header-content">
@@ -169,8 +179,6 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
               <span className="logout-icon">🚪</span>
             </button>
           </div>
-
-          
         </div>
       </header>
 
@@ -182,7 +190,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
             </div>
             <h3>Try one of these prompts or write your own:</h3>
             <div className="suggestions-list">
-              {suggestedPrompts.map((prompt, index) => (
+              {suggestedPrompts.map((prompt: string, index: number) => (
                 <button
                   key={index}
                   className="suggestion-button"
@@ -200,12 +208,15 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
         {messages.map((msg) => (
           <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
-            {msg.details && <ResponseDetails details={msg.details} />}
+            {msg.details && <ResponseDetails details={{
+              anonymizedPrompt: msg.details.anonymizedPrompt || '',
+              raw: msg.details.raw || ''
+            }} />}
             {msg.text}
-            
           </div>
         ))}
 
+        {/* ... rest of the return statement remains the same ... */}
         {loading && (
           <div className="loading-indicator">
             <div className="spinner"></div>
