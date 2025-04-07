@@ -5,13 +5,14 @@ import './Chat.css';
 import ResponseDetails from './ResponseDetails';
 import { useNavigate } from 'react-router-dom';
 
+
 interface Message {
   text: string;
   isUser: boolean;
   id: number;
   details?: {
-    anonymizedPrompt?: string;
-    raw?: string;
+    anonymizedPrompt: string;
+    raw: string;
   };
 }
 
@@ -32,8 +33,16 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+
+
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+    navigate('/login');  // Use React Router navigation
+  };
 
   // Suggested prompts array
   const suggestedPrompts = [
@@ -48,49 +57,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     "Create a message informing Jack that I've changed my email to emily@gmail.com."
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-    navigate('/login');
-  };
 
-  // Update the useEffect for loading history
-  useEffect(() => {
-    const loadHistory = async () => {
-      try {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-          handleLogout();
-          return;
-        }
-        
-        const response = await axios.get(API_URL + '/history', {
-          headers: { 
-            'Authorization': `Bearer ${authToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        setMessages(response.data.history.map((msg: any) => ({
-          text: msg.text,
-          isUser: msg.isUser,
-          id: Date.now() + Math.random(),
-          details: msg.details
-        })));
-      } catch (err) {
-        console.error('Error loading history:', err);
-        if (axios.isAxiosError(err) && err.response?.status === 401) {
-          handleLogout();
-        }
-      }
-    };
-  
-    if (localStorage.getItem('authToken')) {
-      loadHistory();
-    }
-  }, [API_URL]);
-
-  // ... rest of the component remains the same until the return statement ...
 
   useEffect(() => {
     setTimeout(() => {
@@ -122,81 +89,45 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     setLoading(true);
     setError(null);
     
-    const authToken = localStorage.getItem('authToken');
-    if (!authToken) {
-      handleLogout();
-      return;
-    }
-  
-    const newUserMessageId = Date.now();
-    
     try {
-      // Add optimistic user message
-      setMessages(prev => [...prev, { 
-        text: input, 
-        isUser: true, 
-        id: newUserMessageId,
-        details: {} 
-      }]);
-  
+      setMessages(prev => [
+        ...prev, 
+        { text: input, isUser: true, id: Date.now() }
+      ]);
+
       const response = await axios.post<{
         response: string;
         llm_raw: string;
+        llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(
-        API_URL + '/process',
+      }>(API_URL, { prompt: input });
+
+      setMessages(prev => [
+        ...prev, 
         {
-          prompt: input,
-          history: messages.map(msg => ({
-            isUser: msg.isUser,
-            text: msg.isUser 
-              ? msg.details?.anonymizedPrompt 
-              : msg.details?.raw
-          }))
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${authToken}`,
-            'Content-Type': 'application/json'
+          text: response.data.response,
+          isUser: false,
+          id: Date.now() + 1,
+          details: {
+            anonymizedPrompt: response.data.anonymized_prompt,
+            raw: response.data.llm_raw,
           }
         }
-      );
-  
-      // Update messages with actual server response
-      setMessages(prev => prev.map(msg => 
-        msg.id === newUserMessageId
-          ? {
-              ...msg,
-              details: {
-                ...msg.details,
-                anonymizedPrompt: response.data.anonymized_prompt
-              }
-            }
-          : msg
-      ).concat({
-        text: response.data.response,
-        isUser: false,
-        id: Date.now(),
-        details: {
-          raw: response.data.llm_raw,
-          anonymizedPrompt: response.data.anonymized_prompt
-        }
-      }));
-      
+      ]);
     } catch (err) {
       let errorMessage = 'Failed to send message';
       if (axios.isAxiosError(err)) {
         errorMessage = err.response?.data?.error || err.message;
-        if (err.response?.status === 401) handleLogout();
       }
       setError(errorMessage);
+      console.error(err);
     } finally {
       setLoading(false);
       setInput('');
     }
   };
-  
+
   return (
     <div className="chat-container">
       <header className="chat-header">
@@ -227,6 +158,8 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
               <span className="logout-icon">🚪</span>
             </button>
           </div>
+
+          
         </div>
       </header>
 
@@ -238,7 +171,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
             </div>
             <h3>Try one of these prompts or write your own:</h3>
             <div className="suggestions-list">
-              {suggestedPrompts.map((prompt: string, index: number) => (
+              {suggestedPrompts.map((prompt, index) => (
                 <button
                   key={index}
                   className="suggestion-button"
@@ -256,15 +189,12 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
         {messages.map((msg) => (
           <div key={msg.id} className={`message ${msg.isUser ? 'user' : 'bot'}`}>
-            {msg.details && <ResponseDetails details={{
-              anonymizedPrompt: msg.details.anonymizedPrompt || '',
-              raw: msg.details.raw || ''
-            }} />}
+            {msg.details && <ResponseDetails details={msg.details} />}
             {msg.text}
+            
           </div>
         ))}
 
-        {/* ... rest of the return statement remains the same ... */}
         {loading && (
           <div className="loading-indicator">
             <div className="spinner"></div>
