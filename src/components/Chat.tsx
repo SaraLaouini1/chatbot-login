@@ -32,7 +32,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
   const navigate = useNavigate();
 
   // Suggested prompts array
