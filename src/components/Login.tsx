@@ -41,6 +41,7 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
         username: authenticatedUser.username,
         role: authenticatedUser.role,
         expires: Date.now() + 3600000 // 1 hour in milliseconds
+        random: Math.random().toString(36).substr(2, 9)  // Add entropy
       });
       
       localStorage.setItem('authToken', sessionToken);
