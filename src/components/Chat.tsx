@@ -1,3 +1,4 @@
+// src/components/Chat.tsx
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { FiSend } from 'react-icons/fi';
@@ -5,14 +6,13 @@ import './Chat.css';
 import ResponseDetails from './ResponseDetails';
 import { useNavigate } from 'react-router-dom';
 
-
 interface Message {
   text: string;
   isUser: boolean;
   id: number;
   details?: {
-    anonymizedPrompt: string;
-    raw: string;
+    anonymizedPrompt?: string;
+    raw?: string;
   };
 }
 
@@ -35,52 +35,31 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/process';
 
-
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-    navigate('/login');  // Use React Router navigation
-  };
-
-  // Suggested prompts array
-  const suggestedPrompts = [
-    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
-    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
-    "Create a shipping delay notification for Raj Patel indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
-    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 at 08:15 for user Alice Chen",
-    "Format a PCI compliance report for a transaction using card 5500-0000-0000-0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
-    "Create an onboarding checklist for new hire Dr. Emily Wong starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
-    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 at 09:00 to 11:00. Mention a $50 credit compensation",
-    "Generate a customer survey request for James O'Neill offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31.",
-    "Create a message informing Jack that I've changed my email to emily@gmail.com."
-  ];
-
-
-
   useEffect(() => {
-    setTimeout(() => {
-      const firstMessage = document.querySelector('.message');
-      firstMessage?.scrollIntoView({ behavior: 'auto' });
-    }, 100);
-  }, []);
-
-  // Scroll handling useEffect
-  useEffect(() => {
-    if (messages.length === 0) return;
-
-    const lastMessage = messages[messages.length - 1];
-    if (!lastMessage.isUser) {
-      const messageElements = document.querySelectorAll('.message');
-      if (messageElements.length > 0) {
-        const lastBotMessage = messageElements[messageElements.length - 1];
-        lastBotMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const loadHistory = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) return;
+        
+        const response = await axios.post(API_URL + '/history', {}, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        setMessages(response.data.history.map((msg: any) => ({
+          text: msg.text,
+          isUser: msg.isUser,
+          id: Date.now() + Math.random(),
+          details: msg.details
+        })));
+      } catch (err) {
+        console.error('Error loading history:', err);
       }
-    } else {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages, loading]);
+    };
+
+    loadHistory();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,29 +68,61 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     setLoading(true);
     setError(null);
     
-    try {
-      setMessages(prev => [
-        ...prev, 
-        { text: input, isUser: true, id: Date.now() }
-      ]);
+    const newUserMessageId = Date.now();
+    
+    // Add optimistic user message
+    setMessages(prev => [
+      ...prev, 
+      { 
+        text: input, 
+        isUser: true, 
+        id: newUserMessageId,
+        details: {} 
+      }
+    ]);
 
+    try {
+      const authToken = localStorage.getItem('authToken');
       const response = await axios.post<{
         response: string;
         llm_raw: string;
         llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(API_URL, { prompt: input });
+      }>(API_URL, { 
+        prompt: input,
+        history: messages.map(msg => ({
+          isUser: msg.isUser,
+          text: msg.isUser ? msg.details?.anonymizedPrompt : msg.details?.raw
+        }))
+      }, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
 
+      // Update user message with anonymized data
+      setMessages(prev => prev.map(msg => {
+        if (msg.id === newUserMessageId) {
+          return {
+            ...msg,
+            details: {
+              ...msg.details,
+              anonymizedPrompt: response.data.anonymized_prompt
+            }
+          };
+        }
+        return msg;
+      }));
+
+      // Add bot response
       setMessages(prev => [
-        ...prev, 
+        ...prev,
         {
           text: response.data.response,
           isUser: false,
           id: Date.now() + 1,
           details: {
-            anonymizedPrompt: response.data.anonymized_prompt,
             raw: response.data.llm_raw,
+            anonymizedPrompt: response.data.anonymized_prompt
           }
         }
       ]);
@@ -128,7 +139,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
     }
   };
 
-  return (
+   return (
     <div className="chat-container">
       <header className="chat-header">
         <div className="header-content">
