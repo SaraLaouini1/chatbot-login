@@ -131,7 +131,7 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
         llm_after_recontext: string;
         anonymized_prompt: string;
         mapping: AnonymizationMapping[];
-      }>(API_URL, { 
+      }>(API_URL + '/process', { 
         prompt: input,
         history: messages.map(msg => ({
           isUser: msg.isUser,
