@@ -46,26 +46,34 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
   // Suggested prompts array
   const suggestedPrompts = [
-  // Rédaction de clauses
-  "Draft a confidentiality clause protecting Acme Corp trade secrets with $10,000 penalties for breaches",
-  "Create a non-compete agreement for Alice Dupont (CEO) valid until 2026-06-30 covering Europe regions",
-  
-  // Analyse de risques
-  "Analyze termination clauses in this contract between Acme Corp and Global Industries for unilateral modification risks",
-  "Identify GDPR non-compliance risks in the data processing exhibit involving privacy@acmecorp.com transfers to EU",
+  // Strategic Analysis
+  "Simulate an interpretation conflict on the French clause between Acme Corp and Global Industries according to Paris jurisprudence post-2025-06-01",
+  "Assess the risk of reclassifying the service contract as an employment relationship for John Doe working from London",
 
-  // Comparaison
-  "Compare liability caps in Version 1 ($5,000) vs Version 2 ($7,500) of Acme Corp SLA",
-  "Highlight changes in IP ownership terms between draft 2025-01-15 and 2025-06-15",
+  // Tax Optimization
+  "Compare the tax optimization of the $100,000 clauses between Acme Corp vs Global Industries for a US-EU investment",
 
-  // Extraction
-  "List all payment milestones over $1,000 with associated 2025-03-31 deadlines",
-  "Extract third-party beneficiaries from the Acme Corp M&A agreement signed on 2025-04-01",
+  // Complex Negotiation
+  "Generate a concession matrix for the British clause with a fallback of $50,000 and a walk-away point of $30,000",
+  "Draft a basket-and-collar adjustment mechanism for an earn-out of $200,000-$300,000 in Acme Corp acquisition",
 
-  // Simplification
-  "Explain the arbitration procedure in Section 4.3(http://www.example.com/arbitration) using plain language for client review",
-  "Rephrase the technical escrow terms in Schedule 5 for non-technical stakeholders"
+  // Advanced Due Diligence
+  "Identify the hidden liabilities in the German annexes related to Global Industries' previous acquisitions",
+  "Map out the change of control provisions affecting Acme Corp in 15 key contracts",
+
+  // Predictive Litigation
+  "Calculate the probability of success for a termination action for Acme Corp based on 20 similar contracts post-2025-05-01",
+  "Analyze the evidential weight of emails from legal@acmecorp.com in the context of a dispute regarding Canadian issues",
+
+  // Global Compliance
+  "Verify the GDPR/CCPA/LGPD compliance of the data processing clauses at http://www.dataprotection.com/policy with transfers to Asia",
+  "Audit the environmental clauses (CSRD) of the Spanish contract against Global Industries' commitments as of 2025-04-01",
+
+  // Contract Engineering
+  "Create an indexing mechanism for $150,000 linked to http://www.marketindex.com with a cap/floor of $100,000-$200,000",
+  "Draft a hardship clause adapted to US sanctions against the EU in effect since 2025-02-01"
 ];
+
 
 
 
