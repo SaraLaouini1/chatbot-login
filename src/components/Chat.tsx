@@ -50,7 +50,6 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
   "Create a non-compete agreement for Alice Dupont (CEO) valid until 2026-06-30 covering Europe regions",
     
   // Strategic Analysis
-  "Simulate an interpretation conflict on the French clause between Acme Corp and Global Industries according to Paris jurisprudence post-2025-06-01",
   "Assess the risk of reclassifying the service contract as an employment relationship for John Doe working from London",
 
   // Tax Optimization
