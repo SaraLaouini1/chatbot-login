@@ -46,16 +46,27 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
   // Suggested prompts array
   const suggestedPrompts = [
-    "Draft a fraud alert email for card 4111-1111-1111-1111 belonging to John D. Smith used at IP 192.168.1.100 on 2024-03-15 14:30 in Tokyo for a $2,500 charge.",
-    "Generate a patient discharge summary for Maria González treated on 03/25/2024. Include follow-up instructions directing the patient to https://healthcare.com and provide the pharmacy phone number (555) 123-4567.",
-    "Create a shipping delay notification for Raj Patel indicating a $150 compensation for a delivery in Mumbai scheduled by 2024-04-05",
-    "Generate a security alert for a login attempt from IP 2001:0db8:85a3:0000:0000:8a2e:0370:7334 on 2024-02-28 at 08:15 for user Alice Chen",
-    "Format a PCI compliance report for a transaction using card 5500-0000-0000-0004 processed through https://payments.example.com on 2024-01-15 for an amount of $199.99.",
-    "Create an onboarding checklist for new hire Dr. Emily Wong starting on 2024-06-01. Include instructions to access https://intraportal.company.com.",
-    "Draft an outage notification for a network disruption in São Paulo affecting IPs 10.0.0.1 to 10.0.0.5, scheduled from 2024-05-05 at 09:00 to 11:00. Mention a $50 credit compensation",
-    "Generate a customer survey request for James O'Neill offering a $25 reward via https://surveys.company.com to be completed by 2024-12-31.",
-    "Create a message informing Jack that I've changed my email to emily@gmail.com."
-  ];
+  // Rédaction de clauses
+  "Draft a confidentiality clause protecting Acme Corp trade secrets with $10,000 penalties for breaches",
+  "Create a non-compete agreement for Alice Dupont (CEO) valid until 2026-06-30 covering Europe regions",
+  
+  // Analyse de risques
+  "Analyze termination clauses in this contract between Acme Corp and Global Industries for unilateral modification risks",
+  "Identify GDPR non-compliance risks in the data processing exhibit involving privacy@acmecorp.com transfers to EU",
+
+  // Comparaison
+  "Compare liability caps in Version 1 ($5,000) vs Version 2 ($7,500) of Acme Corp SLA",
+  "Highlight changes in IP ownership terms between draft 2025-01-15 and 2025-06-15",
+
+  // Extraction
+  "List all payment milestones over $1,000 with associated 2025-03-31 deadlines",
+  "Extract third-party beneficiaries from the Acme Corp M&A agreement signed on 2025-04-01",
+
+  // Simplification
+  "Explain the arbitration procedure in Section 4.3(http://www.example.com/arbitration) using plain language for client review",
+  "Rephrase the technical escrow terms in Schedule 5 for non-technical stakeholders"
+];
+
 
 
 
