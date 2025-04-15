@@ -46,32 +46,22 @@ export default function Chat({ setIsAuthenticated }: ChatProps) {
 
   // Suggested prompts array
   const suggestedPrompts = [
+    
+  "Create a non-compete agreement for Alice Dupont (CEO) valid until 2026-06-30 covering Europe regions",
+    
   // Strategic Analysis
   "Simulate an interpretation conflict on the French clause between Acme Corp and Global Industries according to Paris jurisprudence post-2025-06-01",
   "Assess the risk of reclassifying the service contract as an employment relationship for John Doe working from London",
 
   // Tax Optimization
-  "Compare the tax optimization of the $100,000 clauses between Acme Corp vs Global Industries for a US-EU investment",
+  "Compare the tax optimization of the $100,000 clauses between Acme Corp vs Global Industries for a US-Europe investment",
 
   // Complex Negotiation
-  "Generate a concession matrix for the British clause with a fallback of $50,000 and a walk-away point of $30,000",
   "Draft a basket-and-collar adjustment mechanism for an earn-out of $200,000-$300,000 in Acme Corp acquisition",
 
-  // Advanced Due Diligence
-  "Identify the hidden liabilities in the German annexes related to Global Industries' previous acquisitions",
-  "Map out the change of control provisions affecting Acme Corp in 15 key contracts",
 
   // Predictive Litigation
-  "Calculate the probability of success for a termination action for Acme Corp based on 20 similar contracts post-2025-05-01",
-  "Analyze the evidential weight of emails from legal@acmecorp.com in the context of a dispute regarding Canadian issues",
-
-  // Global Compliance
-  "Verify the GDPR/CCPA/LGPD compliance of the data processing clauses at http://www.dataprotection.com/policy with transfers to Asia",
-  "Audit the environmental clauses (CSRD) of the Spanish contract against Global Industries' commitments as of 2025-04-01",
-
-  // Contract Engineering
-  "Create an indexing mechanism for $150,000 linked to http://www.marketindex.com with a cap/floor of $100,000-$200,000",
-  "Draft a hardship clause adapted to US sanctions against the EU in effect since 2025-02-01"
+  "Calculate the probability of success for a termination action for Acme Corp based on 20 similar contracts post-2025-05-01"
 ];
 
 
